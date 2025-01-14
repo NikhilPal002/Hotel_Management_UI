@@ -1,0 +1,131 @@
+.container{
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Heading styling */
+.guest-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form fields styling */
+.form-data .form-label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-data .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-data .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Dropdown styling */
+.form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Additional layout for smaller sections */
+.col-md-6, .col-md-2 {
+    margin-bottom: 15px;
+}
+
+#inputCity, #inputZip {
+    width: 100%;
+}
+
+/* Styling for the button container */
+.col-12 {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px;   /* Add spacing above the button */
+}
+
+/* Styling for the submit button */
+.btn {
+    width: 100%; /* Make the button full width */
+    max-width: 200px; /* Set a maximum width for larger screens */
+    padding: 10px 20px; /* Add padding for a comfortable click area */
+    font-size: 16px; /* Set the font size for readability */
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase; /* Convert text to uppercase */
+    background-color: #007bff; /* Primary blue color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth effects */
+}
+
+/* Hover and focus effects */
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.btn:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6); /* Add focus shadow */
+}
+
+/* Disable button style */
+.btn:disabled {
+    background-color: #ccc; /* Gray background for disabled state */
+    cursor: not-allowed; /* Disable pointer cursor */
+    opacity: 0.6; /* Slightly faded appearance */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+    .container {
+        padding: 15px;
+    }
+
+    .guest-heading {
+        font-size: 20px;
+    }
+
+    .form-control, .form-select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
