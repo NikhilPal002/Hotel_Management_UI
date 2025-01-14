@@ -1,43 +1,43 @@
 <div class="container">
     <h3 class="guest-heading">Guest Details</h3>
-    <form action="">
+    <form #form="ngForm" (ngSubmit)="onFormSubmit()">
         <div class="form-data">
             <div class="mb-3">
-                <label for="exampleInputname" class="form-label">Guest Name</label>
-                <input type="name" class="form-control" id="exampleInputname" aria-describedby="nameHelp"
-                    placeholder="Name">
+                <label class="form-label">Guest Name</label>
+                <input type="name" class="form-control" id="guestName" name="guestName"
+                    placeholder="Name" [(ngModel)]="model.guestName" >
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                    placeholder="email@example.com">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    placeholder="email@example.com" [(ngModel)]="model.email">
             </div>
 
             <div class="mb-3">
-                <label class="input-label" for="inputGroupSelect01">Gender</label>
-                <select class="form-select" id="inputGroupSelect01">
+                <label class="input-label">Gender</label>
+                <select class="form-select" id="gender" [(ngModel)]="model.gender" name="gender">
                     <option selected>Choose...</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                    <option value="3">Others</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputphone" class="form-label">Phone Number</label>
-                <input type="number" class="form-control" id="exampleInputphone" aria-describedby="phoneHelp"
-                    placeholder="123456789">
+                <label class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phoneNumber"
+                    placeholder="123456789" [(ngModel)]="model.phoneNumber">
             </div>
 
             <div class="col-md-6">
-                <label for="inputCity" class="form-label">State</label>
-                <input type="text" class="form-control" id="inputCity">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" id="inputCity"  name="inputCity" [(ngModel)]="model.state">
             </div>
 
             <div class="col-md-2">
-                <label for="inputZip" class="form-label">PinCode</label>
-                <input type="text" class="form-control" id="inputZip">
+                <label class="form-label">PinCode</label>
+                <input type="text" class="form-control" id="inputZip" name="inputZip" [(ngModel)]="model.pinCode">
             </div>
 
             <div class="col-12">
