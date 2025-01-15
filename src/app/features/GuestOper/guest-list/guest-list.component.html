@@ -1,0 +1,35 @@
+<div class="container">
+    <h1 class="mt-3">Guest List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/receptionist/guest/add']" class="btn btn-primary" >Add Category</a>
+    </div>
+
+    <ng-container *ngIf="guests" >
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>GuestId</th>
+                    <th>GuestName</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>State</th>
+                    <th>PinCode</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let guest of guests" >
+                    <td>{{guest.guestId}}</td>
+                    <td>{{guest.guestName}}</td>
+                    <td>{{guest.gender}}</td>
+                    <td>{{guest.email}}</td>
+                    <td>{{guest.phoneNumber}}</td>
+                    <td>{{guest.state}}</td>
+                    <td>{{guest.pinCode}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AddGuest } from '../models/add-guest-model';
+import { AddGuest } from '../models/add-guest.model';
 import { GuestService } from '../services/guest.service';
 import { response } from 'express';
 import { provideHttpClient, withFetch } from '@angular/common/http';

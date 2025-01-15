@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AddGuest } from '../models/add-guest-model';
+import { AddGuest } from '../models/add-guest.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { Guest } from '../models/guest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class GuestService {
 
   addGuest(model: AddGuest): Observable<void> {
       return this.http.post<void>(`${environment.apiBaseUrl}/api/Guest/add`,model);
+  }
+
+  getAllGuest(): Observable<Guest[]> {
+      return this.http.get<Guest[]>(`${environment.apiBaseUrl}/api/Guest`);
   }
 }
