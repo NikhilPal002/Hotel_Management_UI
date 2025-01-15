@@ -16,6 +16,7 @@
                     <th>Phone Number</th>
                     <th>State</th>
                     <th>PinCode</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,9 @@
                     <td>{{guest.phoneNumber}}</td>
                     <td>{{guest.state}}</td>
                     <td>{{guest.pinCode}}</td>
+                    <td>
+                        <a class="btn btn-light" [routerLink]="['/receptionist/guest/update/',guest.guestId]" >Edit</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

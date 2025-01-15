@@ -22,7 +22,7 @@ export const routes: Routes = [
         component: GuestsComponent
     },
     {
-        path: 'receptionist/guest/update',
+        path: 'receptionist/guest/update/:id',
         component: UpdateGuestComponent
     }
 ];
