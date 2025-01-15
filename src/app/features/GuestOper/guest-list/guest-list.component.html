@@ -5,7 +5,7 @@
         <a [routerLink]="['/receptionist/guest/add']" class="btn btn-primary" >Add Category</a>
     </div>
 
-    <ng-container *ngIf="guests" >
+    <ng-container *ngIf="guests$ | async as guests" >
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>

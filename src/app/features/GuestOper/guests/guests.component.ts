@@ -2,10 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddGuest } from '../models/add-guest.model';
 import { GuestService } from '../services/guest.service';
-import { response } from 'express';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { error } from 'console';
+import { response} from 'express';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +19,8 @@ export class GuestsComponent implements OnDestroy {
 
   private addGuestSubscription?: Subscription;
 
-  constructor(private guestService : GuestService) {
+  constructor(private guestService : GuestService,
+    private router: Router) {
     this.model = {
       guestName: '',
       gender: '',
@@ -36,12 +36,8 @@ export class GuestsComponent implements OnDestroy {
     this.addGuestSubscription = this.guestService.addGuest(this.model)
     .subscribe({
       next: (response)=>{
-        console.log("Successful")
+        this.router.navigateByUrl('/receptionist/guest');
       },
-      error:(error)=>{
-        console.log(error);
-      }
-
     })
   }
 

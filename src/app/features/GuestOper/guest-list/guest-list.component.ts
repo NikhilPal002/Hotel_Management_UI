@@ -5,6 +5,7 @@ import { response } from 'express';
 import { Guest } from '../models/guest.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-guest-list',
@@ -14,18 +15,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './guest-list.component.css'
 })
 export class GuestListComponent implements OnInit {
-  guests?: Guest[];
+  guests$?: Observable<Guest[]>;
   
   constructor(private guestService: GuestService){
 
   }
 
   ngOnInit(): void {
-    this.guestService.getAllGuest()
-    .subscribe({
-      next: (response) =>{
-        this.guests = response;
-      }
-    })
+     this.guests$ = this.guestService.getAllGuest();
   }
 }
