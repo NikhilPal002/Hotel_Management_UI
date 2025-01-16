@@ -1,0 +1,61 @@
+<div class="container">
+    <h3 class="room-heading">Edit Room</h3>
+    <ng-container *ngIf ="room;else notFound"  >
+        <form #Form="ngForm" (ngSubmit)="onFormSubmit()">
+            <div class="form-data">
+                <div class="mb-3">
+                    <label class="form-label">Room Id</label>
+                    <input type="text" disabled class="form-control" id="roomId" name="roomId"
+                         [(ngModel)]="room.roomId">
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label">Room Type</label>
+                    <input type="text" class="form-control" id="roomType" name="roomType"
+                         [(ngModel)]="room.roomType">
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description"
+                         [(ngModel)]="room.description" ></textarea>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label">Number Of Beds</label>
+                    <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds"
+                         [(ngModel)]="room.numberOfBeds" >
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label">Price Per Night</label>
+                    <input type="number" class="form-control" id="pricePerNight" name="pricePerNight"
+                         [(ngModel)]="room.pricePerNight" >
+                </div>
+    
+                <div class="mb-3">
+                    <label class="input-label">Room Status</label>
+                    <select class="form-select" id="status"  name="status" [(ngModel)]="room.status" >
+                        <option selected>{{room.status}}</option>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                        <option value="Occupied">Under Maintenance</option>
+                    </select>
+                </div>
+    
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Update Room</button>
+                </div>
+    
+            </div>
+        </form>
+
+    </ng-container>
+
+    <ng-template #notFound>
+        <div class="alert alert-warning" role="alert" >
+           Guest not found!
+        </div>
+
+    </ng-template>
+</div>

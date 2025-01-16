@@ -7,6 +7,7 @@ import { UpdateGuestComponent } from './features/GuestOper/update-guest/update-g
 import { GuestListComponent } from './features/GuestOper/guest-list/guest-list.component';
 import { AddRoomsComponent } from './features/RoomsOpr/add-rooms/add-rooms.component';
 import { ListRoomsComponent } from './features/RoomsOpr/list-rooms/list-rooms.component';
+import { UpdateRoomsComponent } from './features/RoomsOpr/update-rooms/update-rooms.component';
 
 
 export const routes: Routes = [
@@ -34,5 +35,9 @@ export const routes: Routes = [
     {
         path: 'manager/room/add',
         component: AddRoomsComponent
-    }
+    },
+    {
+        path: 'manager/room/update/:id',
+        component: UpdateRoomsComponent
+    },
 ];
