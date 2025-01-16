@@ -10,13 +10,13 @@ import { UpdateRoom } from '../models/update-room.model';
 @Component({
   selector: 'app-update-rooms',
   standalone: true,
-  imports: [RouterModule,CommonModule,FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './update-rooms.component.html',
   styleUrl: './update-rooms.component.css'
 })
-export class UpdateRoomsComponent implements OnInit,OnDestroy {
+export class UpdateRoomsComponent implements OnInit, OnDestroy {
 
-  id:number | null = null;
+  id: number | null = null;
   paramsSubscription?: Subscription;
   updateRoomSubscription?: Subscription;
   room?: Room;
@@ -24,10 +24,10 @@ export class UpdateRoomsComponent implements OnInit,OnDestroy {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private roomService: RoomService
-  ){ }
+  ) { }
 
 
-  
+
   ngOnInit(): void {
     this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params) => {
@@ -51,28 +51,40 @@ export class UpdateRoomsComponent implements OnInit,OnDestroy {
   }
 
   onFormSubmit(): void {
-      const updateRoom: UpdateRoom = {
-        roomType: this.room?.roomType ?? '',
-        description: this.room?.description ?? '',
-        numberOfBeds: this.room?.numberOfBeds ?? 0,
-        pricePerNight: this.room?.pricePerNight ?? 0,
-        status: this.room?.status ?? '',
-      }
-
-  
-      if (this.id) {
-        this.updateRoomSubscription = this.roomService.updateRoom(this.id, updateRoom)
-          .subscribe({
-            next: (response) => {
-              this.router.navigateByUrl('/manager/room')
-            },
-            error: (error) => {
-              console.error('Update failed:', error);
-              alert('Guest not found or update failed!');
-            }
-          })
-      }
+    const updateRoom: UpdateRoom = {
+      roomType: this.room?.roomType ?? '',
+      description: this.room?.description ?? '',
+      numberOfBeds: this.room?.numberOfBeds ?? 0,
+      pricePerNight: this.room?.pricePerNight ?? 0,
+      status: this.room?.status ?? '',
     }
+
+
+    if (this.id) {
+      this.updateRoomSubscription = this.roomService.updateRoom(this.id, updateRoom)
+        .subscribe({
+          next: (response) => {
+            this.router.navigateByUrl('/manager/room')
+          },
+          error: (error) => {
+            console.error('Update failed:', error);
+            alert('Guest not found or update failed!');
+          }
+        })
+    }
+  }
+
+  onDelete(): void {
+    if (this.id) {
+      this.roomService.deleteRoom(this.id)
+      .subscribe({
+        next:(response)=>{
+          this.router.navigateByUrl('/manager/room')
+        }
+      });
+    }
+  }
+
 
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
