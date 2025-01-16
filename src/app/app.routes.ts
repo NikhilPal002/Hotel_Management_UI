@@ -10,6 +10,7 @@ import { ListRoomsComponent } from './features/RoomsOpr/list-rooms/list-rooms.co
 import { UpdateRoomsComponent } from './features/RoomsOpr/update-rooms/update-rooms.component';
 import { AddInventoryComponent } from './features/InventoryOper/add-inventory/add-inventory.component';
 import { ListInventoryComponent } from './features/InventoryOper/list-inventory/list-inventory.component';
+import { UpdateInventoryComponent } from './features/InventoryOper/update-inventory/update-inventory.component';
 
 
 export const routes: Routes = [
@@ -49,5 +50,9 @@ export const routes: Routes = [
     {
         path: 'manager/inventory',
         component: ListInventoryComponent
+    },
+    {
+        path: 'manager/inventory/update/:id',
+        component: UpdateInventoryComponent
     },
 ];

@@ -4,6 +4,7 @@ import { AddInventory } from '../models/add-inventory.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Inventory } from '../models/list-inventory.model';
+import { UpdateInventory } from '../models/update-inventory.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,17 @@ export class InventoryService {
   getAllInventory(): Observable<Inventory[]> {
     return this.http.get<Inventory[]>(`${environment.apiBaseUrl}/api/Inventory`);
   } 
+
+  getInventoryById(id:number): Observable<Inventory> {
+    return this.http.get<Inventory>(`${environment.apiBaseUrl}/api/Inventory/${id}`);
+  } 
+
+  updateInventory(id:number, updateInventory:UpdateInventory): Observable<Inventory> {
+    return this.http.put<Inventory>(`${environment.apiBaseUrl}/api/Inventory/${id}`, updateInventory);
+  }
+
+  deleteInventory(id:number): Observable<Inventory> {
+    return this.http.delete<Inventory>(`${environment.apiBaseUrl}/api/Inventory/${id}`);
+  }
+
 }
