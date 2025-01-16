@@ -1,0 +1,35 @@
+<div class="container">
+    <h1 class="mt-3">Inventory List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/manager/inventory/add']" class="btn btn-primary" >Add Item</a>
+    </div>
+
+    <ng-container *ngIf="inventories$ | async as inventories" >
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>InventoryId</th>
+                    <th>Inventory Name</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Last Updated</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of inventories" >
+                    <td>{{i.inventoryId}}</td>
+                    <td>{{i.inventoryName}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.lastUpdated | date:'medium' }}</td>
+                    <td>
+                        <!-- <a class="btn btn-light" [routerLink]="['/manager/room/update',i.inventoryId]" >Edit</a> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</div>

@@ -33,7 +33,7 @@ export class AddInventoryComponent implements OnDestroy {
     this.AddInventorySubscription = this.inventoryService.addInventory(this.model)
     .subscribe({
       next:(response)=>{
-        console.log("Inventory added successfully")
+        this.router.navigateByUrl('/manager/inventory');
       }
     })
   }

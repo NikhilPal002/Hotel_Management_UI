@@ -9,6 +9,7 @@ import { AddRoomsComponent } from './features/RoomsOpr/add-rooms/add-rooms.compo
 import { ListRoomsComponent } from './features/RoomsOpr/list-rooms/list-rooms.component';
 import { UpdateRoomsComponent } from './features/RoomsOpr/update-rooms/update-rooms.component';
 import { AddInventoryComponent } from './features/InventoryOper/add-inventory/add-inventory.component';
+import { ListInventoryComponent } from './features/InventoryOper/list-inventory/list-inventory.component';
 
 
 export const routes: Routes = [
@@ -42,7 +43,11 @@ export const routes: Routes = [
         component: UpdateRoomsComponent
     },
     {
-        path: 'manager/inventory',
+        path: 'manager/inventory/add',
         component: AddInventoryComponent
+    },
+    {
+        path: 'manager/inventory',
+        component: ListInventoryComponent
     },
 ];
