@@ -1,0 +1,37 @@
+<div class="container">
+    <h1 class="mt-3">Guest List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/manager/room/add']" class="btn btn-primary" >Add Room</a>
+    </div>
+
+    <ng-container *ngIf="rooms$ | async as rooms" >
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>RoomId</th>
+                    <th>RoomType</th>
+                    <th>Description</th>
+                    <th>Number Of Beds</th>
+                    <th>Price Per Night</th>
+                    <th>Room Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of rooms" >
+                    <td>{{room.roomId}}</td>
+                    <td>{{room.roomType}}</td>
+                    <td>{{room.description}}</td>
+                    <td>{{room.numberOfBeds}}</td>
+                    <td>${{room.pricePerNight}}</td>
+                    <td>{{room.status}}</td>
+                    <td>
+                        <a class="btn btn-light" [routerLink]="['/manager/room/update',room.roomId]" >Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</div>
