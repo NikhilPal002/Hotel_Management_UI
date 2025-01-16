@@ -38,7 +38,7 @@ export class AddRoomsComponent implements OnDestroy {
     this.addRoomSubscription = this.roomService.addRoom(this.model)
     .subscribe({
       next: (response)=>{
-        console.log("Successfull");
+        this.router.navigateByUrl('/manager/room');
       },
     })
   }
