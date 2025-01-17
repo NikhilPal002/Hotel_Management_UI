@@ -1,0 +1,54 @@
+<div class="container">
+    <h1 class="mt-3">Booking List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/receptionist/booking/add']" class="btn btn-primary">Create Booking</a>
+    </div>
+
+    <div class="table-wrapper">
+        <ng-container *ngIf="booking$ | async as bookings">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>N0. of Adults</th>
+                        <th>No. of Children</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>No. of Nights</th>
+                        <th>Total Cost</th>
+                        <th>Booking Status</th>
+                        <th>Payment Status</th>
+                        <th>Guest Name</th>
+                        <th>Guest Email</th>
+                        <th>Room No.</th>
+                        <th>Room Type</th>
+                        <th>Price Per Night</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let booking of bookings">
+                        <td>{{ booking.bookingId }}</td>
+                        <td>{{ booking.numberOfAdults }}</td>
+                        <td>{{ booking.numberOfChildren }}</td>
+                        <td>{{ booking.checkIn | date: 'shortDate' }}</td>
+                        <td>{{ booking.checkOut | date: 'shortDate' }}</td>
+                        <td>{{ booking.numberOfNights }}</td>
+                        <td>{{ booking.totalCost | currency }}</td>
+                        <td>{{ booking.bookingStatus }}</td>
+                        <td>{{ booking.paymentStatus }}</td>
+                        <td>{{ booking.guest?.guestName }}</td>
+                        <td>{{ booking.guest?.email }}</td>
+                        <td>{{ booking.room?.roomId }}</td>
+                        <td>{{ booking.room?.roomType }}</td>
+                        <td>{{ booking.room?.pricePerNight | currency }}</td>
+                        <td>
+                            <button class="btn btn-danger mt-3" type="button" (click)="onDelete(booking.bookingId)">Cancel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+    </div>
+</div>

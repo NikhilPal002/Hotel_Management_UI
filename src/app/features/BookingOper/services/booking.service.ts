@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateBooking } from '../models/create-booking.model';
 import { environment } from '../../../../environments/environment';
+import { Booking } from '../models/list-booking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,13 @@ export class BookingService {
 
   addBooking(model: CreateBooking):Observable<void>{
     return this.http.post<void>(`${environment.apiBaseUrl}/api/Booking/create`, model);
+  }
+  
+  getAllBooking():Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${environment.apiBaseUrl}/api/Booking`);
+  }
+  deletBooking(id:number):Observable<void>{
+    return this.http.delete<void>(`${environment.apiBaseUrl}/api/Booking/${id}`);
   }
   
 }
