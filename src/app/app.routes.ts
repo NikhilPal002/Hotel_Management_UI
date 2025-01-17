@@ -14,6 +14,7 @@ import { UpdateInventoryComponent } from './features/InventoryOper/update-invent
 import { AddStaffComponent } from './features/StaffOper/add-staff/add-staff.component';
 import { ListStaffComponent } from './features/StaffOper/list-staff/list-staff.component';
 import { UpdateStaffComponent } from './features/StaffOper/update-staff/update-staff.component';
+import { CreateBookingComponent } from './features/BookingOper/create-booking/create-booking.component';
 
 
 export const routes: Routes = [
@@ -70,4 +71,10 @@ export const routes: Routes = [
         path: 'manager/staff/update/:id',
         component: UpdateStaffComponent
     },
+
+    {
+        path: 'receptionist/booking/add',
+        component: CreateBookingComponent
+    },
+    
 ];

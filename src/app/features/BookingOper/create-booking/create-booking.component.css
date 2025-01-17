@@ -1,0 +1,101 @@
+.container{
+    width: 100%;
+    max-width: 500px;
+    margin : 30px auto;
+    padding: 20px;
+    background-color:rgba(235, 236, 241, 0.694);
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.room-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Form fields styling */
+.form-data .form-label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-data .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-data .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Dropdown styling */
+.form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Additional layout for smaller sections */
+.col-md-6, .col-md-2 {
+    margin-bottom: 15px;
+}
+
+#inputCity, #inputZip {
+    width: 100%;
+}
+
+/* Styling for the button container */
+.col-12 {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px;   /* Add spacing above the button */
+}
+
+/* Styling for the submit button */
+.btn {
+    width: 100%; /* Make the button full width */
+    max-width: 200px; /* Set a maximum width for larger screens */
+    padding: 10px 20px; /* Add padding for a comfortable click area */
+    font-size: 16px; /* Set the font size for readability */
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase; /* Convert text to uppercase */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth effects */
+}
+
+/* Hover and focus effects */
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.btn:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6); /* Add focus shadow */
+}
