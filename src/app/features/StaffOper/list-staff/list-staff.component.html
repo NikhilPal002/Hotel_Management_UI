@@ -1,0 +1,43 @@
+<div class="container">
+    <h1 class="mt-3">Staff List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/manager/staff/add']" class="btn btn-primary" >Add Staff</a>
+    </div>
+
+    <ng-container *ngIf="staff$ | async as staffs" >
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>StaffId</th>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>Age (In Years)</th>
+                    <th>Address</th>
+                    <th>Salary</th>
+                    <th>Designation</th>
+                    <th>Join Date</th>
+                    <th>Insurance</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let staff of staffs" >
+                    <td>{{staff.staffId}}</td>
+                    <td>{{staff.fullName}}</td>
+                    <td>{{staff.email}}</td>
+                    <td>{{staff.age}}</td>
+                    <td>{{staff.sAddress}}</td>
+                    <td>${{staff.salary}}</td>
+                    <td>{{staff.designation}}</td>
+                    <td>{{staff.joinDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{staff.nic}}</td>
+                    <td>
+                        <a class="btn btn-light" [routerLink]="['/manager/staff/update',staff.staffId]" >Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</div>

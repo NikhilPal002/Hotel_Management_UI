@@ -3,7 +3,7 @@ import { AddStaff } from '../models/add-staff.model';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { StaffService } from '../services/staff.service';
-import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-staff',
@@ -18,7 +18,9 @@ export class AddStaffComponent implements OnDestroy{
   private addStaffSubscription?: Subscription;
 
 
-  constructor(private staffService: StaffService){
+  constructor(private staffService: StaffService,
+    private router:Router
+  ){
     this.model = {
       fullName:'',
       email:'',
@@ -36,7 +38,7 @@ export class AddStaffComponent implements OnDestroy{
     this.addStaffSubscription  = this.staffService.addStaff(this.model)
     .subscribe({
       next:(response)=>{
-        console.log("Successful");
+        this.router.navigateByUrl('/manager/staff');
       }
     })
   }
