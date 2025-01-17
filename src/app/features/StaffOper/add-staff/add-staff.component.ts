@@ -26,7 +26,7 @@ export class AddStaffComponent implements OnDestroy{
       email:'',
       age:0,
       sAddress:'',
-      salary:'',
+      salary:0,
       designation:'',
       joinDate: new Date(),
       nIC:''

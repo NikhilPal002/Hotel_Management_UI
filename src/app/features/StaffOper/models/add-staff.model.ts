@@ -3,7 +3,7 @@ export interface AddStaff{
     email:string,
     age:number,
     sAddress:string,
-    salary:string,
+    salary:number,
     designation:string,
     joinDate: Date,
     nIC:string

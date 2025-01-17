@@ -13,6 +13,7 @@ import { ListInventoryComponent } from './features/InventoryOper/list-inventory/
 import { UpdateInventoryComponent } from './features/InventoryOper/update-inventory/update-inventory.component';
 import { AddStaffComponent } from './features/StaffOper/add-staff/add-staff.component';
 import { ListStaffComponent } from './features/StaffOper/list-staff/list-staff.component';
+import { UpdateStaffComponent } from './features/StaffOper/update-staff/update-staff.component';
 
 
 export const routes: Routes = [
@@ -64,5 +65,9 @@ export const routes: Routes = [
     {
         path: 'manager/staff/add',
         component: AddStaffComponent
+    },
+    {
+        path: 'manager/staff/update/:id',
+        component: UpdateStaffComponent
     },
 ];
