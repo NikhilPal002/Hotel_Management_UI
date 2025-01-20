@@ -1,57 +1,91 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-      <a class="navbar-brand" href="#">Hotel Vistaar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
+<nav class="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
+  <div class="container">
+    <a class="navbar-brand custom-brand" href="#">Hotel Vistaar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left-aligned navigation links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active custom-link" aria-current="page" href="#">Home</a>
+        </li>
 
-          <ng-container *ngIf="user !== undefined && user?.roles?.includes('Receptionist')">
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['receptionist/guest']" >Guest</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Receptionist</a>
-              <ul class="dropdown-menu">
-                
-                <li class="nav-item">
-                  <a class="dropdown-item"  [routerLink]="['/receptionist/room']">Add</a>
-                </li>
-                <hr class="dropdown-divider">
-                <li class="nav-item">
-                  <a class="dropdown-item"  [routerLink]="['/receptionist/booking']">Home</a>
-                </li>
-              </ul>
-            </li>
-          </ng-container>
-          
-
-          <div>
-            <ng-container *ngIf="user === undefined;else showLogout" >
-              <!-- show login -->
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/login']" >Login</a>
-              </li>
-            </ng-container>
-            <ng-template #showLogout>
-              <div class="d-flex align-items-center">
-                <span>{{user?.email}}</span>
-                <button class="btn btn-primary ms-3" (click)="onLogout()" >Logout</button>
-              </div>
-            </ng-template>
-          </div>
+        <!-- Receptionist-specific links -->
+        <ng-container *ngIf="user?.roles?.includes('Receptionist')">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['receptionist/guest']" >Guest</a>
+            <a class="nav-link custom-link" [routerLink]="['/receptionist/guest']">Guest</a>
           </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search Rooms" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/receptionist/booking']">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/receptionist/payment']">Payment</a>
+          </li>
+        </ng-container>
+
+        <!-- Manager-specific links -->
+        <ng-container *ngIf="user?.roles?.includes('Manager')">
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/manager/inventory']">Inventory</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/manager/room']">Room</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/manager/staff']">Staff</a>
+          </li>
+        </ng-container>
+
+        <!-- Owner-specific links -->
+        <ng-container *ngIf="user?.roles?.includes('Owner')">
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/owner/reports']">Reports</a>
+          </li>
+        </ng-container>
+      </ul>
+
+      <!-- Center-aligned search bar -->
+      <form class="d-flex search-bar" role="search">
+        <input
+          class="form-control me-2 custom-search"
+          type="search"
+          placeholder="Search Rooms"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success custom-search-btn" type="submit">
+          Search
+        </button>
+      </form>
+
+      <!-- Right-aligned login/logout section -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ng-container *ngIf="user === undefined; else loggedIn">
+          <!-- Show login -->
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/login']">Login</a>
+          </li>
+        </ng-container>
+        <ng-template #loggedIn>
+          <li class="nav-item d-flex align-items-center">
+            <span class="me-3 user-email">{{ user?.email }}</span>
+            <button
+              class="btn btn-primary custom-logout-btn"
+              (click)="onLogout()"
+            >
+              Logout
+            </button>
+          </li>
+        </ng-template>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

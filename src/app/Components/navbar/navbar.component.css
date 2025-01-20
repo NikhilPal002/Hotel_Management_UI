@@ -1,0 +1,87 @@
+/* Navbar background and text styles */
+.custom-navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+  }
+  
+  .custom-brand {
+    color: #df2222;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .custom-brand:hover {
+    color: #f39c12;
+    text-decoration: none;
+  }
+  
+  /* Navbar links */
+  .custom-link {
+    color: #3d20c0;
+    margin-right: 15px;
+    text-transform: capitalize;
+    font-weight:500;
+  }
+  
+  .custom-link:hover {
+    color: #f39c12;
+    text-decoration: underline;
+  }
+  
+  /* Search bar */
+  .search-bar {
+    width: 50%;
+  }
+  
+  .custom-search {
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .custom-search-btn {
+    border-radius: 20px;
+    padding: 5px 20px;
+  }
+  
+  /* Logout button */
+  .custom-logout-btn {
+    background-color: #f39c12;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .custom-logout-btn:hover {
+    background-color: #e67e22;
+    color: #fff;
+  }
+  
+  /* User email */
+  .user-email {
+    color: #341bd7;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .search-bar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .custom-link {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .custom-logout-btn {
+      margin-top: 10px;
+    }
+  }
+  
