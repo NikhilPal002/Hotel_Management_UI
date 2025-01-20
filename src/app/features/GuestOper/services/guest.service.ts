@@ -5,29 +5,39 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Guest } from '../models/guest.model';
 import { UpdateGuest } from '../models/update-guest.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cookieService:CookieService
+  ) { }
+
+  
+  getAllGuest(): Observable<Guest[]> {
+    return this.http.get<Guest[]>(`${environment.apiBaseUrl}/api/Guest`);
+  }
+
+  
+  getGuestById(id:number): Observable<Guest>{
+    return this.http.get<Guest>(`${environment.apiBaseUrl}/api/Guest/${id}`)
+  }
 
   addGuest(model: AddGuest): Observable<void> {
       return this.http.post<void>(`${environment.apiBaseUrl}/api/Guest/add`,model);
   }
 
-  getAllGuest(): Observable<Guest[]> {
-      return this.http.get<Guest[]>(`${environment.apiBaseUrl}/api/Guest`);
-  }
-
-  getGuestById(id:number): Observable<Guest>{
-    return this.http.get<Guest>(`${environment.apiBaseUrl}/api/Guest/${id}`)
-  }
-
   updateGuest(id:number,updateGuest:UpdateGuest): Observable<Guest>{
-    return this.http.put<Guest>(`${environment.apiBaseUrl}/api/Guest/update/${id}`,updateGuest)
-  }
+    return this.http.put<Guest>(`${environment.apiBaseUrl}/api/Guest/update/${id}`,updateGuest,
+      {
+        headers:{
+          'Authorization' : this.cookieService.get('Authorization')
+        }
+      }
+    )}
 
   deleteGuest(id:number): Observable<Guest>{
     return this.http.delete<Guest>(`${environment.apiBaseUrl}/api/Guest/delete/${id}`)

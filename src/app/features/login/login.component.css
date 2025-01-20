@@ -1,4 +1,26 @@
 /* General styling for the login form */
+
+.container{
+    width: 100%;
+    max-width: 500px;
+    margin : 30px auto;
+    padding: 20px;
+    background-color:rgba(235, 236, 241, 0.694);
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.login-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+
 .login-form {
     width: 100%;
     max-width: 400px;
