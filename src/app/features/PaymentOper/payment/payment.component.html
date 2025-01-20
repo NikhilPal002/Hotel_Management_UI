@@ -1,0 +1,23 @@
+<div class="container">
+    <h3 class="payment-heading">Make Payment</h3>
+    <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <div class="payment-field">
+            <div class="mb-3">
+                <label class="input-label">Payment Methdod</label>
+                <select class="form-select" id="status" name="status" [(ngModel)]="model.paymentMethod">
+                    <option selected>Choose...</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="UPI">UPI</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword5" class="form-label">Billing Id</label>
+                <input type="number" id="billingid" name="billingid" class="form-control" 
+                    placeholder="0" [(ngModel)]="model.billingId">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Pay</button>
+        </div>
+    </form>
+</div>

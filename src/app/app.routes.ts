@@ -16,6 +16,7 @@ import { ListStaffComponent } from './features/StaffOper/list-staff/list-staff.c
 import { UpdateStaffComponent } from './features/StaffOper/update-staff/update-staff.component';
 import { CreateBookingComponent } from './features/BookingOper/create-booking/create-booking.component';
 import { ListBookingComponent } from './features/BookingOper/list-booking/list-booking.component';
+import { PaymentComponent } from './features/PaymentOper/payment/payment.component';
 
 
 export const routes: Routes = [
@@ -80,6 +81,10 @@ export const routes: Routes = [
     {
         path: 'receptionist/booking',
         component: ListBookingComponent
+    },
+    {
+        path: 'receptionist/payment',
+        component: PaymentComponent
     },
     
 ];
