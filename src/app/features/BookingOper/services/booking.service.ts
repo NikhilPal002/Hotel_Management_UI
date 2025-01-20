@@ -13,14 +13,14 @@ export class BookingService {
   constructor(private http: HttpClient) { }
 
   addBooking(model: CreateBooking):Observable<void>{
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/Booking/create`, model);
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Booking/create?AddAuth=true`, model);
   }
   
   getAllBooking():Observable<Booking[]>{
-    return this.http.get<Booking[]>(`${environment.apiBaseUrl}/api/Booking`);
+    return this.http.get<Booking[]>(`${environment.apiBaseUrl}/api/Booking?AddAuth=true`);
   }
   deletBooking(id:number):Observable<void>{
-    return this.http.delete<void>(`${environment.apiBaseUrl}/api/Booking/${id}`);
+    return this.http.delete<void>(`${environment.apiBaseUrl}/api/Booking/${id}?AddAuth=true`);
   }
   
 }

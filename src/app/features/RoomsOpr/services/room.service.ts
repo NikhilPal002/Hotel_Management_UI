@@ -14,19 +14,19 @@ export class RoomService {
   constructor(private http: HttpClient ) { }
 
   addRoom(model: AddRoom): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/Room`,model);
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Room?AddAuth=true`,model);
   }
 
   getAllRoom(): Observable<Room[]> {
-    return this.http.get<Room[]>(`${environment.apiBaseUrl}/api/Room`);
+    return this.http.get<Room[]>(`${environment.apiBaseUrl}/api/Room?AddAuth=true`);
   }
   getRoomById(id:number): Observable<Room> {
-    return this.http.get<Room>(`${environment.apiBaseUrl}/api/Room/${id}`);
+    return this.http.get<Room>(`${environment.apiBaseUrl}/api/Room/${id}?AddAuth=true`);
   }
   updateRoom(id:number,updateRoom:UpdateRoom): Observable<Room> {
-    return this.http.put<Room>(`${environment.apiBaseUrl}/api/Room/${id}`,updateRoom);
+    return this.http.put<Room>(`${environment.apiBaseUrl}/api/Room/${id}?AddAuth=true`,updateRoom);
   }
   deleteRoom(id:number): Observable<Room> {
-    return this.http.delete<Room>(`${environment.apiBaseUrl}/api/Room/${id}`);
+    return this.http.delete<Room>(`${environment.apiBaseUrl}/api/Room/${id}?AddAuth=true`);
   }
 }

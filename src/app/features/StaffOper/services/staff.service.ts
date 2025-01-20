@@ -14,23 +14,23 @@ export class StaffService {
   constructor(private http: HttpClient) { }
 
   addStaff(model: AddStaff): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/Staff`, model);
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Staff?AddAuth=true`, model);
   }
 
   getAllStaff():Observable<Staff[]>{
-    return this.http.get<Staff[]>(`${environment.apiBaseUrl}/api/Staff`);
+    return this.http.get<Staff[]>(`${environment.apiBaseUrl}/api/Staff?AddAuth=true`);
   }
 
   getStaffById(id:number):Observable<Staff>{
-    return this.http.get<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}`);
+    return this.http.get<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}?AddAuth=true`);
   }
 
   updateStaff(id:number, updateStaff:UpdateStaff):Observable<Staff>{
-    return this.http.put<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}`,updateStaff);
+    return this.http.put<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}?AddAuth=true`,updateStaff);
   }
 
   deleteStaff(id:number):Observable<Staff>{
-    return this.http.delete<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}`);
+    return this.http.delete<Staff>(`${environment.apiBaseUrl}/api/Staff/${id}?AddAuth=true`);
   }
 
 }
