@@ -18,28 +18,23 @@ export class GuestService {
 
   
   getAllGuest(): Observable<Guest[]> {
-    return this.http.get<Guest[]>(`${environment.apiBaseUrl}/api/Guest`);
+    return this.http.get<Guest[]>(`${environment.apiBaseUrl}/api/Guest?AddAuth=true`);
   }
 
   
   getGuestById(id:number): Observable<Guest>{
-    return this.http.get<Guest>(`${environment.apiBaseUrl}/api/Guest/${id}`)
+    return this.http.get<Guest>(`${environment.apiBaseUrl}/api/Guest/${id}?AddAuth=true`)
   }
 
   addGuest(model: AddGuest): Observable<void> {
-      return this.http.post<void>(`${environment.apiBaseUrl}/api/Guest/add`,model);
+      return this.http.post<void>(`${environment.apiBaseUrl}/api/Guest/add?AddAuth=true`,model);
   }
 
   updateGuest(id:number,updateGuest:UpdateGuest): Observable<Guest>{
-    return this.http.put<Guest>(`${environment.apiBaseUrl}/api/Guest/update/${id}`,updateGuest,
-      {
-        headers:{
-          'Authorization' : this.cookieService.get('Authorization')
-        }
-      }
+    return this.http.put<Guest>(`${environment.apiBaseUrl}/api/Guest/update/${id}?AddAuth=true`,updateGuest
     )}
 
   deleteGuest(id:number): Observable<Guest>{
-    return this.http.delete<Guest>(`${environment.apiBaseUrl}/api/Guest/delete/${id}`)
+    return this.http.delete<Guest>(`${environment.apiBaseUrl}/api/Guest/delete/${id}?AddAuth=true`)
   }
 }

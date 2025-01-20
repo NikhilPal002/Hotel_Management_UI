@@ -17,6 +17,7 @@ import { UpdateStaffComponent } from './features/StaffOper/update-staff/update-s
 import { CreateBookingComponent } from './features/BookingOper/create-booking/create-booking.component';
 import { ListBookingComponent } from './features/BookingOper/list-booking/list-booking.component';
 import { PaymentComponent } from './features/PaymentOper/payment/payment.component';
+import { authGuard } from './features/login/guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -27,64 +28,79 @@ export const routes: Routes = [
     },
     {
         path: 'receptionist/guest',
-        component: GuestListComponent
+        component: GuestListComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'receptionist/guest/add',
-        component: GuestsComponent
+        component: GuestsComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'receptionist/guest/update/:id',
-        component: UpdateGuestComponent
+        component: UpdateGuestComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/room',
-        component: ListRoomsComponent
+        component: ListRoomsComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/room/add',
-        component: AddRoomsComponent
+        component: AddRoomsComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/room/update/:id',
-        component: UpdateRoomsComponent
+        component: UpdateRoomsComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/inventory/add',
-        component: AddInventoryComponent
+        component: AddInventoryComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/inventory',
-        component: ListInventoryComponent
+        component: ListInventoryComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/inventory/update/:id',
-        component: UpdateInventoryComponent
+        component: UpdateInventoryComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/staff',
-        component: ListStaffComponent
+        component: ListStaffComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/staff/add',
-        component: AddStaffComponent
+        component: AddStaffComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'manager/staff/update/:id',
-        component: UpdateStaffComponent
+        component: UpdateStaffComponent,
+        canActivate:[authGuard]
     },
 
     {
         path: 'receptionist/booking/add',
-        component: CreateBookingComponent
+        component: CreateBookingComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'receptionist/booking',
-        component: ListBookingComponent
+        component: ListBookingComponent,
+        canActivate:[authGuard]
     },
     {
         path: 'receptionist/payment',
-        component: PaymentComponent
+        component: PaymentComponent,
+        canActivate:[authGuard]
     },
     
 ];
