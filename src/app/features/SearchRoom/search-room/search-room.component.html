@@ -1,0 +1,59 @@
+<div class="container">
+    <h2>Search Rooms</h2>
+
+    <!-- Search form -->
+    <form (ngSubmit)="onSearch()">
+        <div class="form-group">
+            <label for="numberOfBeds">Number of Beds</label>
+            <input type="number" id="numberOfBeds" [(ngModel)]="searchCriteria.numberOfBeds" name="numberOfBeds"
+                class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="checkInDate">Check-in Date</label>
+            <input type="date" id="checkInDate" [(ngModel)]="searchCriteria.checkInDate" name="checkInDate"
+                class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="checkOutDate">Check-out Date</label>
+            <input type="date" id="checkOutDate" [(ngModel)]="searchCriteria.checkOutDate" name="checkOutDate"
+                class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Display results -->
+    <div *ngIf="rooms.length > 0" class="table-responsive">
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Room ID</th>
+                    <th>Room Type</th>
+                    <th>Description</th>
+                    <th>Number of Beds</th>
+                    <th>Price Per Night</th>
+                    <th>Status</th>
+                    <th>Action</th> <!-- Added Action column -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of rooms">
+                    <td>{{ room.roomId }}</td>
+                    <td>{{ room.roomType }}</td>
+                    <td>{{ room.description }}</td>
+                    <td>{{ room.numberOfBeds }}</td>
+                    <td>{{ room.pricePerNight | currency }}</td>
+                    <td>{{ room.status }}</td>
+                    <td>
+                        <!-- Added Booking Button -->
+                        <button class="btn btn-success" (click)="onBookRoom(room)">Book</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+    </div>
+</div>
