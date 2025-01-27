@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link custom-link" [routerLink]="['/receptionist/payment']">Payment</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link custom-link" [routerLink]="['/receptionist/search']">Search</a>
+          </li>
         </ng-container>
 
         <!-- Manager-specific links -->
@@ -53,18 +56,6 @@
         </ng-container>
       </ul>
 
-      <!-- Center-aligned search bar -->
-      <form class="d-flex search-bar" role="search">
-        <input
-          class="form-control me-2 custom-search"
-          type="search"
-          placeholder="Search Rooms"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success custom-search-btn" type="submit">
-          Search
-        </button>
-      </form>
 
       <!-- Right-aligned login/logout section -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

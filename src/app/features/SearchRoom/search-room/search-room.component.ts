@@ -18,12 +18,15 @@ export class SearchRoomComponent implements OnInit {
     numberOfBeds: null as number | null,
     checkInDate: null as string | null,  // Change the type to string | null
     checkOutDate: null as string | null  // Change the type to string | null
+
   };
+
+
   rooms: Room[] = [];  // Type the rooms array as Room[]
   errorMessage: string = '';
 
   constructor(private roomService: SearchRoomService,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
@@ -66,7 +69,7 @@ export class SearchRoomComponent implements OnInit {
   // New method to handle booking a room
   onBookRoom(room: Room): void {
     this.router.navigate(['/receptionist/booking/add'], {
-      state: { roomDetails: room }  // Pass room details to booking form
+      state: { roomDetails: room }  // Pass the room details to the booking page
     });
   }
 }
