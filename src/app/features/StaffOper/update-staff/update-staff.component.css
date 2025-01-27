@@ -4,7 +4,7 @@
     max-width: 500px;
     margin: 30px auto;
     padding: 20px;
-    background-color:rgba(235, 236, 241, 0.694);
+    background-color: rgba(235, 236, 241, 0.694);
     border: 2px solid #007bff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -12,12 +12,12 @@
 }
 
 /* Heading styling */
-h1 {
+.room-heading {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #555;
+    color: #1434A4;
 }
 
 /* Form fields styling */
@@ -75,7 +75,8 @@ h1 {
 }
 
 .btn {
-    width: 48%; /* Adjusted for two buttons side by side */
+    width: 48%;
+    /* Adjusted for two buttons side by side */
     padding: 10px;
     margin: 16px 0px 0px;
     font-size: 16px;
@@ -90,22 +91,22 @@ h1 {
 
 /* Primary button */
 .btn-primary {
-    background-color: #007bff;
+    background-color: #25cbd7;
     margin-right: 12px;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #e58900;
     transform: scale(1.05);
 }
 
 /* Danger button */
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #db4a59;
 }
 
 .btn-danger:hover {
-    background-color: #a71d2a;
+    background-color: #e61328;
     transform: scale(1.05);
 }
 
@@ -144,7 +145,8 @@ h1 {
     .btn {
         font-size: 14px;
         padding: 8px;
-        width: 100%; /* Full-width buttons on smaller screens */
+        width: 100%;
+        /* Full-width buttons on smaller screens */
     }
 
     .mt-3.d-flex {

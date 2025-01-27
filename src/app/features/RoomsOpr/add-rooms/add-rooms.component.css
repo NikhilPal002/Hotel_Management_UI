@@ -15,7 +15,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #555;
+    color: #1434A4  ;
 }
 
 /* Form fields styling */
@@ -84,6 +84,7 @@
     text-transform: uppercase; /* Convert text to uppercase */
     color: #fff; /* White text color */
     border: none; /* Remove border */
+    background-color: #25cbd7 ;
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Change cursor to pointer on hover */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth effects */
@@ -91,7 +92,7 @@
 
 /* Hover and focus effects */
 .btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #e58900; /* Darker blue on hover */
     transform: scale(1.05); /* Slight zoom effect */
 }
 

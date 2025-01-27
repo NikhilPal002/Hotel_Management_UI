@@ -15,7 +15,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #555;
+    color: #1434A4;
 }
 
 /* Form fields styling */
@@ -89,9 +89,13 @@
     transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
+.btn-primary{
+    background-color: #25cbd7 ;
+}
+
 /* Hover and focus effects */
 .btn:hover {
-    background-color: #0056b3; 
+    background-color: #e58900; 
     transform: scale(1.05); 
 }
 

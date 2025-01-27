@@ -16,13 +16,36 @@ import { InventoryService } from '../services/inventory.service';
 export class ListInventoryComponent implements OnInit {
 
   inventories$?:Observable<Inventory[]>
+  paginatedInventories: Inventory[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(private inventoryService: InventoryService){
 
   }
+
   ngOnInit(): void {
     this.inventories$ = this.inventoryService.getAllInventory();
+    this.inventories$.subscribe((data) => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updatePaginatedInventories(data);
+    });
   }
 
+  updatePaginatedInventories(inventories: Inventory[]): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedInventories = inventories.slice(startIndex, endIndex);
+  }
 
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.inventories$?.subscribe((data) => this.updatePaginatedInventories(data));
+    }
+  }
 }
+

@@ -15,7 +15,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #555;
+    color: #1434A4;
 }
 
 /* Form fields styling */
@@ -82,7 +82,8 @@
     font-size: 16px; /* Set the font size for readability */
     font-weight: bold; /* Make the text bold */
     text-transform: uppercase; /* Convert text to uppercase */
-    color: #fff; /* White text color */
+    color: #fff; 
+    background-color: #25cbd7;
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Change cursor to pointer on hover */
@@ -91,7 +92,7 @@
 
 /* Hover and focus effects */
 .btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #e58900; 
     transform: scale(1.05); /* Slight zoom effect */
 }
 

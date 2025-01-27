@@ -12,15 +12,14 @@
 h1 {
     font-size: 2rem;
     font-weight: bold;
-    color: #343a40; /* Dark gray */
+    color: #1434A4; /* Dark gray */
     text-align: center;
     margin-bottom: 20px;
 }
 
 /* Button styling */
 .btn-primary {
-    background-color: #276ef2;
-    border-color: #007bff;
+    background-color:  #25cbd7;
     font-size: 1rem;
     font-weight: 500;
     padding: 10px 20px;
@@ -29,8 +28,7 @@ h1 {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+    background-color: #e58900;
 }
 
 /* Table styling */
@@ -43,11 +41,10 @@ h1 {
 }
 
 .table thead th {
-    background-color: #276ef2;
+    background-color:  #25cbd7;
     color: #ffffff;
     text-align: center;
     font-weight: 600;
-    border: none;
 }
 
 .table tbody tr:hover {
