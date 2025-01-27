@@ -1,91 +1,167 @@
-/* General styling for the container */
-.container {
-    margin: 20px auto;
-    max-width: 1200px;
-    background-color: #f8f9fa; /* Light background */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
-/* Header styles */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
 h1 {
+    color: #1434A4;
     font-size: 2rem;
     font-weight: bold;
-    color: #343a40; /* Dark gray */
-    text-align: center;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Button styling */
+/* Add Button */
+.d-flex {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
 .btn-primary {
-    background-color: #276ef2;
-    border-color: #007bff;
+    background-color: #25cbd7;
+    border: none;
+    color: white;
+    padding: 8px 16px;
     font-size: 1rem;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
+    background-color: #e58900;
 }
 
-/* Table styling */
+/* Table Styles */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* General Table Styling */
 .table {
     width: 100%;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.table thead th {
-    background-color: #276ef2;
-    color: #ffffff;
-    text-align: center;
-    font-weight: 600;
-    border: none;
-}
-
-.table tbody tr:hover {
-    background-color: #f1f3f5; /* Light gray hover */
-}
-
-.table td,
-.table th {
-    text-align: center;
-    vertical-align: middle;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .table th {
+    text-align: center; /* Center-align the headings */
+    background-color:#25cbd7; /* Dark blue for heading background */
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+  }
+  
+  .table td {
+    text-align: center; /* Center-align the content */
     padding: 10px;
+    color: #333;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #eaeaea; /* Light grey color for even rows */
+  }
+  
+  .table tr:nth-child(odd) {
+    background-color: #f9f9f9; /* White background for odd rows */
+  }
+  
+  .table tr:hover {
+    background-color: #dcdcdc; /* Slightly darker grey for hover effect */
+  }
+  
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6; /* Table borders */
+  }
+  
+  /* Pagination Styling */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .pagination .btn {
+    margin: 0 5px;
+    padding: 8px 15px;
     border: 1px solid #dee2e6;
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .table thead {
-        display: none; /* Hide table headers on small screens */
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .pagination .btn:hover {
+    background-color: #e58900;
+    color: white;
+  }
+  
+  .pagination .btn.active {
+    background-color: #25cbd7;
+    color: white;
+    pointer-events: none;
+  }
+  
+  .pagination .btn:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    pointer-events: none;
+  }
+  
+  /* Add Button Styling */
+  .btn-primary {
+    background-color: #25cbd7;
+    border-color: #1434A4;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #e58900;
+    border-color: #0f2a7a;
+  }
+  
+  /* Table Wrapper Spacing */
+  .table-wrapper {
+    margin-top: 20px;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .table {
+      font-size: 14px;
     }
-
-    .table tbody tr {
-        display: block;
-        margin-bottom: 15px;
+    .btn-primary {
+      font-size: 14px;
+      padding: 6px 12px;
     }
-
-    .table tbody td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border: none;
-        border-bottom: 1px solid #dee2e6;
+    .pagination .btn {
+      padding: 6px 10px;
+      font-size: 14px;
     }
-
-    .table tbody td:before {
-        content: attr(data-label);
-        font-weight: bold;
-        width: 50%;
-        display: inline-block;
-        color: #495057;
-    }
-}
+  }
+  

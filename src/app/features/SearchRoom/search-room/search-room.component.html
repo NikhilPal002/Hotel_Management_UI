@@ -22,7 +22,7 @@
     </form>
 
     <!-- Display results -->
-    <div *ngIf="rooms.length > 0" class="table-responsive">
+    <ng-container *ngIf="rooms.length > 0" class="table-responsive">
         <table class="table table-striped mt-3">
             <thead>
                 <tr>
@@ -50,7 +50,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </ng-container>
 
     <!-- Error message -->
     <div *ngIf="errorMessage" class="alert alert-danger mt-3">

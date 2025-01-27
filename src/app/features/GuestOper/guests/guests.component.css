@@ -16,7 +16,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color:  #2408b1;
 }
 
 /* Form fields styling */
@@ -83,7 +83,7 @@
     font-size: 16px; /* Set the font size for readability */
     font-weight: bold; /* Make the text bold */
     text-transform: uppercase; /* Convert text to uppercase */
-    background-color: #007bff; /* Primary blue color */
+    background-color: #25cbd7; /* Primary blue color */
     color: #fff; /* White text color */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
@@ -93,13 +93,13 @@
 
 /* Hover and focus effects */
 .btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #e58900; /* Darker blue on hover */
     transform: scale(1.05); /* Slight zoom effect */
 }
 
 .btn:focus {
     outline: none; /* Remove focus outline */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.6); /* Add focus shadow */
+    box-shadow: 0 0 5px #e58900; /* Add focus shadow */
 }
 
 /* Disable button style */

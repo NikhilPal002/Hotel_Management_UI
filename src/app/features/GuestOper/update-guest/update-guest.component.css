@@ -17,7 +17,7 @@ h1 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #2408b1;
 }
 
 /* Form fields styling */
@@ -94,21 +94,21 @@ h1 {
 
 /* Primary button */
 .btn-primary {
-    background-color: #007bff;
+    background-color: #25cbd7;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #e58900;
     transform: scale(1.05);
 }
 
 /* Danger button */
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #df5462;
 }
 
 .btn-danger:hover {
-    background-color: #a71d2a;
+    background-color: #dd1428;
     transform: scale(1.05);
 }
 
