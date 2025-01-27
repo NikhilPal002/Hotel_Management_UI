@@ -6,14 +6,14 @@
   }
   
   .custom-brand {
-    color: #df2222;
+    color: #f39c12;
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
   }
   
   .custom-brand:hover {
-    color: #f39c12;
+    color: #ebc78e;
     text-decoration: none;
   }
   
