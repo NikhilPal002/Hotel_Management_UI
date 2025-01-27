@@ -1,130 +1,157 @@
-/* General container styles */
-#home_page {
-    max-width: 90%;
-    margin: auto;
-    padding: 20px;
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    color: #333;
+    background-color: #f4f4f9;
+    line-height: 1.6;
 }
 
-/* Carousel styles */
-#carouselExampleCaptions {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.carousel-inner .carousel-item img {
-    object-fit: cover;
-    width: 100%;
-    height: 60vh;
-    border-radius: 10px;
-    transition: transform 0.5s ease;
-}
-
-.carousel-inner .carousel-item:hover img {
-    transform: scale(1.05);
-}
-
-.carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5);
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to right, #1434A4, #4a90e2);
     color: #fff;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-caption h5 {
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.carousel-caption p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-top: 10px;
-}
-
-
-/* Room section styles */
- .room-heading {
     text-align: center;
-    color: blue;
+    padding: 100px 20px;
+}
+
+.hero-title {
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
-.rooms_Container {
-    padding: 30px;
-    max-width: 1200px;
-    margin: auto;
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
 }
 
-.room-card {
+.hero-btn {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.hero-btn:hover {
+    background: #e58900;
+}
+
+/* Services Section */
+.services-section {
+    background: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #1434A4;
+}
+
+.services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    /* justify-content: center;  */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    width: 64rem;
 }
 
- .card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-} 
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.service-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-img-top {
-    border-radius: 10px 10px 0 0;
-    object-fit: cover;
-    height: 200px;
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
+.service-card img {
+    width: 100%;
+    height: auto;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin: 20px 0;
     color: #333;
 }
 
-.card-text {
+.service-card p {
     font-size: 1rem;
-    color: #666;
+    padding: 0 20px 20px;
 }
 
-.btn-primary {
-    background-color: #3498db;
-    border: none;
-    transition: background-color 0.2s ease;
+/* Testimonials Section */
+.testimonials-section {
+    background: #1434A4;
+    color: #fff;
+    padding: 60px 20px;
 }
 
-.btn-primary:hover {
-    background-color: #1d78c1;
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-.room-text{
-    color: blue;
-    text-align:right;
-    padding: 10px;
+.testimonial {
+    background: #4a90e2;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.card-values {
-    display: flex;
-    gap: 10px; /* Space between the items */
-    align-items: center; /* Align items vertically */
-  }
-  
-  .card-value-beds, .card-value-status{
-    margin: 0; 
-  }
-  .card-value-status span{
-    margin: 0; 
-    color: rgba(81, 228, 40, 0.966);
-  }
+.testimonial p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.testimonial h5 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Footer Section */
+.footer {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-links a {
+    color: #ff9800;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
