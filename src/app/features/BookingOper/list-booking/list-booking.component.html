@@ -1,17 +1,14 @@
 <div class="container">
     <h1 class="mt-3">Booking List</h1>
 
-    <!-- <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/receptionist/booking/add']" class="btn btn-primary">Create Booking</a>
-    </div> -->
-
     <div class="table-wrapper">
+        <!-- Async pipe to handle data -->
         <ng-container *ngIf="booking$ | async as bookings">
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
                         <th>Booking ID</th>
-                        <th>N0. of Adults</th>
+                        <th>No. of Adults</th>
                         <th>No. of Children</th>
                         <th>Check-In</th>
                         <th>Check-Out</th>
@@ -44,11 +41,28 @@
                         <td>{{ booking.room?.roomType }}</td>
                         <td>{{ booking.room?.pricePerNight | currency }}</td>
                         <td>
-                            <button class="btn btn-danger mt-3" type="button" (click)="onDelete(booking.bookingId)">Cancel</button>
+                            <button class="btn btn-danger" type="button" (click)="onDelete(booking.bookingId)">
+                                Cancel
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </ng-container>
+    </div>
+
+    <!-- Pagination Section -->
+    <div class="pagination-container">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
     </div>
 </div>

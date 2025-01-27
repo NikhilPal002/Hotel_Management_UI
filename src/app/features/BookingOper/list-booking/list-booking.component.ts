@@ -16,6 +16,10 @@ export class ListBookingComponent implements OnInit {
 
   booking$?: Observable<Booking[]>;
   id: number | null = null;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(private bookingService: BookingService,
     private router: Router
@@ -52,7 +56,28 @@ export class ListBookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.booking$ = this.bookingService.getAllBooking();
+    this.loadBookings();
+  }
+
+  loadBookings(): void {
+    this.bookingService.getAllBooking().subscribe((bookings) => {
+      const totalItems = bookings.length;
+      this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.booking$ = new Observable((observer) => {
+        const start = (this.currentPage - 1) * this.itemsPerPage;
+        const end = start + this.itemsPerPage;
+        observer.next(bookings.slice(start, end));
+        observer.complete();
+      });
+    });
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadBookings();
+    }
   }
 
 
