@@ -9,7 +9,7 @@ import { Room } from '../models/searchRoom.model';
 })
 export class SearchRoomService {
 
-  private apiUrl = `${environment.apiBaseUrl}/api/SearchRoom`;  // Change the URL to your API
+  private apiUrl = `${environment.apiBaseUrl}/api/SearchRoom?AddAuth=true`;  // Change the URL to your API
 
   constructor(private http: HttpClient) {}
 

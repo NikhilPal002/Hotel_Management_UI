@@ -91,7 +91,7 @@ export const routes: Routes = [
     {
         path: 'receptionist/booking/add',
         component: CreateBookingComponent,
-        // canActivate:[authGuard]
+        canActivate:[authGuard]
     },
     {
         path: 'receptionist/booking',

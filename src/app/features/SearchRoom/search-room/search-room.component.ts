@@ -16,13 +16,13 @@ import { CommonModule } from '@angular/common';
 export class SearchRoomComponent implements OnInit {
   searchCriteria = {
     numberOfBeds: null as number | null,
-    checkInDate: null as string | null,  // Change the type to string | null
-    checkOutDate: null as string | null  // Change the type to string | null
+    checkInDate: null as string | null,  
+    checkOutDate: null as string | null  
 
   };
 
 
-  rooms: Room[] = [];  // Type the rooms array as Room[]
+  rooms: Room[] = [];  
   errorMessage: string = '';
 
   constructor(private roomService: SearchRoomService,
@@ -32,7 +32,6 @@ export class SearchRoomComponent implements OnInit {
   ngOnInit(): void { }
 
   onSearch(): void {
-    // Reset error message and rooms list
     this.errorMessage = '';
     this.rooms = [];
 
@@ -40,7 +39,6 @@ export class SearchRoomComponent implements OnInit {
     let formattedCheckInDate = this.searchCriteria.checkInDate ? this.formatDate(this.searchCriteria.checkInDate) : null;
     let formattedCheckOutDate = this.searchCriteria.checkOutDate ? this.formatDate(this.searchCriteria.checkOutDate) : null;
 
-    // console.log(`Request URL: http://localhost:5153/api/SearchRoom?numberOfBeds=${this.searchCriteria.numberOfBeds}&checkInDate=${formattedCheckInDate}&checkOutDate=${formattedCheckOutDate}`);
     // Update the search criteria with formatted dates
     this.searchCriteria.checkInDate = formattedCheckInDate;
     this.searchCriteria.checkOutDate = formattedCheckOutDate;

@@ -13,13 +13,13 @@
   }
   
   .custom-brand:hover {
-    color: #ebc78e;
+    color: #25cbd7;
     text-decoration: none;
   }
   
   /* Navbar links */
   .custom-link {
-    color: #3d20c0;
+    color: #25cbd7;
     margin-right: 15px;
     text-transform: capitalize;
     font-weight:500;
@@ -62,7 +62,7 @@
   
   /* User email */
   .user-email {
-    color: #341bd7;
+    color: #25cbd7;
     font-size: 1rem;
     font-weight: bold;
     margin-left: 20px;
