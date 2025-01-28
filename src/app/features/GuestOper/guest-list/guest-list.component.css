@@ -1,167 +1,146 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-    color: #333;
-}
-
+/* Container styling */
 .container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-/* Heading */
+/* Heading styling */
 h1 {
-    color: #1434A4;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
+  color: #1434A4;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-/* Add Button */
-.d-flex {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-}
-
+/* Button styling */
 .btn-primary {
-    background-color: #25cbd7;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #25cbd7;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
-    background-color: #e58900;
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-/* Table Styles */
-.table-wrapper {
-    overflow-x: auto;
-}
-
-/* General Table Styling */
+/* Table styling */
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-  }
-  
-  .table th {
-    text-align: center; /* Center-align the headings */
-    background-color:#25cbd7; /* Dark blue for heading background */
-    color: white;
-    font-weight: bold;
-    padding: 12px;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #25cbd7;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table td {
+  color: #333;
+}
+
+/* Hover effect for table rows */
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Pagination list */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Pagination items */
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #25cbd7;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination li a:hover {
+  background-color: #e58900;
+  color: #fff;
+}
+
+.pagination li.active a {
+  background-color: #25cbd7;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+  /* Disable clicking on the active page */
+}
+
+/* Alert styling */
+.alert {
+  text-align: center;
+  background-color: #ffcccb;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+
+  .table th,
   .table td {
-    text-align: center; /* Center-align the content */
-    padding: 10px;
-    color: #333;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #eaeaea; /* Light grey color for even rows */
-  }
-  
-  .table tr:nth-child(odd) {
-    background-color: #f9f9f9; /* White background for odd rows */
-  }
-  
-  .table tr:hover {
-    background-color: #dcdcdc; /* Slightly darker grey for hover effect */
-  }
-  
-  .table-bordered th,
-  .table-bordered td {
-    border: 1px solid #dee2e6; /* Table borders */
-  }
-  
-  /* Pagination Styling */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .pagination .btn {
-    margin: 0 5px;
-    padding: 8px 15px;
-    border: 1px solid #dee2e6;
-    background-color: #f9f9f9;
-    color: #333;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .pagination .btn:hover {
-    background-color: #e58900;
-    color: white;
-  }
-  
-  .pagination .btn.active {
-    background-color: #25cbd7;
-    color: white;
-    pointer-events: none;
-  }
-  
-  .pagination .btn:disabled {
-    background-color: #e9ecef;
-    color: #6c757d;
-    pointer-events: none;
-  }
-  
-  /* Add Button Styling */
-  .btn-primary {
-    background-color: #25cbd7;
-    border-color: #1434A4;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-size: 16px;
-    text-decoration: none;
-  }
-  
-  .btn-primary:hover {
-    background-color: #e58900;
-    border-color: #0f2a7a;
-  }
-  
-  /* Table Wrapper Spacing */
-  .table-wrapper {
-    margin-top: 20px;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .table {
       font-size: 14px;
-    }
-    .btn-primary {
+      padding: 10px;
+  }
+
+  .btn-primary {
       font-size: 14px;
       padding: 6px 12px;
-    }
-    .pagination .btn {
+  }
+
+  .pagination li a {
       padding: 6px 10px;
       font-size: 14px;
-    }
   }
-  
+}

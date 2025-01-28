@@ -16,8 +16,9 @@ export class ListBookingComponent implements OnInit {
 
   booking$?: Observable<Booking[]>;
   id: number | null = null;
+  paginatedBookings: Booking[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  pageSize: number = 5;
   totalPages: number = 0;
   pages: number[] = [];
 
@@ -56,29 +57,26 @@ export class ListBookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadBookings();
-  }
-
-  loadBookings(): void {
-    this.bookingService.getAllBooking().subscribe((bookings) => {
-      const totalItems = bookings.length;
-      this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+    this.booking$ = this.bookingService.getAllBooking();
+    this.booking$.subscribe((data) => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
       this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      this.booking$ = new Observable((observer) => {
-        const start = (this.currentPage - 1) * this.itemsPerPage;
-        const end = start + this.itemsPerPage;
-        observer.next(bookings.slice(start, end));
-        observer.complete();
-      });
+      this.updatePaginatedBookings(data);
     });
   }
 
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.loadBookings();
+  updatePaginatedBookings(bookings: Booking[]): void {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.paginatedBookings = bookings.slice(startIndex, endIndex);
     }
-  }
+  
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.booking$?.subscribe((data) => this.updatePaginatedBookings(data));
+      }
+    }
 
 
   onDelete(id: number): void {

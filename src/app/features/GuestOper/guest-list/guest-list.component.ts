@@ -15,49 +15,36 @@ import { Observable } from 'rxjs';
   styleUrl: './guest-list.component.css'
 })
 export class GuestListComponent implements OnInit {
-  guests: Guest[] = []; // Full list of guests
+  guests$?:Observable<Guest[]> // Full list of guests
   paginatedGuests: Guest[] = []; // Current page of guests
   currentPage = 1; // Active page
-  itemsPerPage = 5; // Number of guests per page
-  totalPages = 0; // Total pages available
+  pageSize: number = 5; // Number of guests per page
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(private guestService: GuestService) {}
 
   ngOnInit(): void {
     // Fetch guests from service
-    this.guestService.getAllGuest().subscribe((data) => {
-      this.guests = data;
-      this.totalPages = Math.ceil(this.guests.length / this.itemsPerPage);
-      this.updatePaginatedGuests();
+    this.guests$ = this.guestService.getAllGuest();
+    this.guests$.subscribe((data) => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updatePaginatedGuests(data);
     });
   }
 
   // Updates the paginated list of guests
-  updatePaginatedGuests(): void {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedGuests = this.guests.slice(startIndex, endIndex);
-  }
-
-  // Navigates to the specified page
-  goToPage(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedGuests();
-  }
-
-  // Handles previous page navigation
-  goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePaginatedGuests();
+  updatePaginatedGuests(guests: Guest[]): void {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.paginatedGuests = guests.slice(startIndex, endIndex);
     }
-  }
-
-  // Handles next page navigation
-  goToNextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePaginatedGuests();
+  
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.guests$?.subscribe((data) => this.updatePaginatedGuests(data));
+      }
     }
-  }
 }

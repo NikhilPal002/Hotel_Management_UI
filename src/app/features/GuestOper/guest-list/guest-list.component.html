@@ -5,54 +5,55 @@
         <a [routerLink]="['/receptionist/guest/add']" class="btn btn-primary">Add Guest</a>
     </div>
 
-    <div class="table-wrapper">
-        <ng-container *ngIf="paginatedGuests.length > 0">
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>GuestId</th>
-                        <th>GuestName</th>
-                        <th>Gender</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>State</th>
-                        <th>PinCode</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let guest of paginatedGuests">
-                        <td>{{ guest.guestId }}</td>
-                        <td>{{ guest.guestName }}</td>
-                        <td>{{ guest.gender }}</td>
-                        <td>{{ guest.email }}</td>
-                        <td>{{ guest.phoneNumber }}</td>
-                        <td>{{ guest.state }}</td>
-                        <td>{{ guest.pinCode }}</td>
-                        <td>
-                            <a class="btn btn-light"
-                                [routerLink]="['/receptionist/guest/update/', guest.guestId]">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </ng-container>
+    <ng-container *ngIf="paginatedGuests.length > 0">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>GuestId</th>
+                    <th>GuestName</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>State</th>
+                    <th>PinCode</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let guest of paginatedGuests">
+                    <td>{{ guest.guestId }}</td>
+                    <td>{{ guest.guestName }}</td>
+                    <td>{{ guest.gender }}</td>
+                    <td>{{ guest.email }}</td>
+                    <td>{{ guest.phoneNumber }}</td>
+                    <td>{{ guest.state }}</td>
+                    <td>{{ guest.pinCode }}</td>
+                    <td>
+                        <a class="btn btn-light" [routerLink]="['/receptionist/guest/update/', guest.guestId]">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <div *ngIf="paginatedGuests.length === 0" class="alert alert-info mt-3">
-            No guests found.
+        <!-- Pagination Controls -->
+        <div class="pagination-container mt-3">
+            <ul class="pagination">
+                <li *ngIf="currentPage > 1">
+                    <a (click)="changePage(currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                    <a (click)="changePage(page)">{{ page }}</a>
+                </li>
+                <li *ngIf="currentPage < totalPages">
+                    <a (click)="changePage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </ng-container>
 
-    <!-- Pagination Controls -->
-    <div class="pagination mt-3">
-        <button class="btn btn-secondary me-2" [disabled]="currentPage === 1"
-            (click)="goToPreviousPage()">Previous</button>
-        <button class="btn btn-outline-primary" *ngFor="let page of [].constructor(totalPages); let i = index"
-            [class.active]="i + 1 === currentPage" (click)="goToPage(i + 1)">
-            {{ i + 1 }}
-        </button>
-        <button class="btn btn-secondary ms-2" [disabled]="currentPage === totalPages"
-            (click)="goToNextPage()">Next</button>
+    <!-- Show message if no inventories -->
+    <div *ngIf="paginatedGuests.length === 0" class="alert alert-info mt-3">
+        No items in inventory.
     </div>
 
 
