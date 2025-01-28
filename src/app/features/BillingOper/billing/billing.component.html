@@ -1,0 +1,67 @@
+<div class="billing-container">
+    <h2 class="bill-heading">Generate Bill</h2>
+    <form (ngSubmit)="generateBill()">
+      <div class="form-group">
+        <label for="bookingId">Booking ID:</label>
+        <input
+          type="number"
+          id="bookingId"
+          [(ngModel)]="billingData.bookingId"
+          name="bookingId"
+          required
+          class="form-control"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="taxes">Taxes:</label>
+        <input
+          type="number"
+          id="taxes"
+          [(ngModel)]="billingData.taxes"
+          name="taxes"
+          required
+          class="form-control"
+        />
+      </div>
+  
+      <!-- Services Dropdown with "Select Services" as default -->
+      <div class="form-group">
+        <label for="services">Select Services:</label>
+        <select
+          id="services"
+          class="form-control"
+          multiple
+          [(ngModel)]="selectedServiceIds"
+          name="services"
+          (change)="onServiceSelection()"
+        >
+          <option *ngFor="let service of services" [value]="service.id">
+            {{ service.serviceName }} - {{ service.serviceCost | currency }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Display selected services -->
+      <div class="form-group selected-services">
+        <label>Selected Services:</label>
+        <ul>
+          <li *ngFor="let service of selectedServices">
+            {{ service.serviceName }} - {{ service.serviceCost | currency }}
+          </li>
+        </ul>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Generate Bill</button>
+    </form>
+  
+    <div class="result" *ngIf="generatedBill">
+      <h3>Bill Generated</h3>
+      <pre>{{ generatedBill | json }}</pre>
+    </div>
+  
+    <div class="error" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

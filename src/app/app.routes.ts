@@ -19,6 +19,7 @@ import { ListBookingComponent } from './features/BookingOper/list-booking/list-b
 import { PaymentComponent } from './features/PaymentOper/payment/payment.component';
 import { authGuard } from './features/login/guards/auth.guard';
 import { SearchRoomComponent } from './features/SearchRoom/search-room/search-room.component';
+import { BillingComponent } from './features/BillingOper/billing/billing.component';
 
 
 export const routes: Routes = [
@@ -107,6 +108,11 @@ export const routes: Routes = [
     {
         path: 'receptionist/search',
         component: SearchRoomComponent,
+        canActivate:[authGuard]
+    },
+    {
+        path: 'receptionist/billing',
+        component: BillingComponent,
         canActivate:[authGuard]
     },
     
