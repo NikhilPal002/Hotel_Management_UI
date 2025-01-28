@@ -22,7 +22,7 @@
     </form>
 
     <!-- Display results -->
-    <ng-container *ngIf="rooms.length > 0" class="table-responsive">
+    <ng-container *ngIf="paginatedRooms.length > 0" class="table-responsive">
         <table class="table table-striped mt-3">
             <thead>
                 <tr>
@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let room of rooms">
+                <tr *ngFor="let room of paginatedRooms">
                     <td>{{ room.roomId }}</td>
                     <td>{{ room.roomType }}</td>
                     <td>{{ room.description }}</td>
@@ -50,6 +50,21 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container mt-3">
+            <ul class="pagination">
+                <li *ngIf="currentPage > 1">
+                    <a (click)="changePage(currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                    <a (click)="changePage(page)">{{ page }}</a>
+                </li>
+                <li *ngIf="currentPage < totalPages">
+                    <a (click)="changePage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </div>
     </ng-container>
 
     <!-- Error message -->

@@ -28,13 +28,16 @@ h2 {
 form {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px; /* Space between fields */
+  gap: 15px;
+  /* Space between fields */
   margin-bottom: 30px;
 }
 
 .form-group {
-  flex: 1; /* All fields take equal space */
-  min-width: 150px; /* Prevent fields from shrinking too much */
+  flex: 1;
+  /* All fields take equal space */
+  min-width: 150px;
+  /* Prevent fields from shrinking too much */
 }
 
 label {
@@ -54,15 +57,16 @@ input[type="date"] {
 
 input[type="number"]:focus,
 input[type="date"]:focus {
-  border-color:  #25cbd7;
+  border-color: #25cbd7;
   outline: none;
   box-shadow: 0 0 5px rgba(20, 52, 164, 0.5);
 }
 
 button[type="submit"] {
-  flex-basis: 100%; /* Button takes the full row */
+  flex-basis: 100%;
+  /* Button takes the full row */
   max-width: 100%;
-  background-color:  #25cbd7;
+  background-color: #25cbd7;
   color: #fff;
   padding: 10px 15px;
   font-size: 1rem;
@@ -87,7 +91,7 @@ button[type="submit"]:hover {
 .table th,
 .table td {
   padding: 12px 15px;
-  text-align: left;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
@@ -122,6 +126,52 @@ button[type="submit"]:hover {
   background-color: #218838;
 }
 
+/* Pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Pagination list */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Pagination items */
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #25cbd7;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination li a:hover {
+  background-color: #e58900;
+  color: #fff;
+}
+
+.pagination li.active a {
+  background-color: #25cbd7;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+  /* Disable clicking on the active page */
+}
+
 /* Error Message */
 .alert-danger {
   background-color: #f8d7da;
@@ -135,14 +185,14 @@ button[type="submit"]:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-      padding: 15px;
+    padding: 15px;
   }
 
   table {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
   }
 
   button {
-      font-size: 0.85rem;
+    font-size: 0.85rem;
   }
 }
