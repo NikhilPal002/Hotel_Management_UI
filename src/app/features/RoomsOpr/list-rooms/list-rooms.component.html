@@ -5,7 +5,7 @@
         <a [routerLink]="['/manager/room/add']" class="btn btn-primary" >Add Room</a>
     </div>
 
-    <ng-container *ngIf="rooms$ | async as rooms" >
+    <ng-container *ngIf="paginatedRooms.length > 0" >
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let room of rooms" >
+                <tr *ngFor="let room of paginatedRooms" >
                     <td>{{room.roomId}}</td>
                     <td>{{room.roomType}}</td>
                     <td>{{room.description}}</td>
@@ -32,6 +32,25 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container mt-3">
+            <ul class="pagination">
+                <li *ngIf="currentPage > 1">
+                    <a (click)="changePage(currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                    <a (click)="changePage(page)">{{ page }}</a>
+                </li>
+                <li *ngIf="currentPage < totalPages">
+                    <a (click)="changePage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </div>
     </ng-container>
+
+    <div *ngIf="paginatedRooms.length === 0" class="alert alert-info mt-3">
+        No rooms available.
+    </div>
 
 </div>

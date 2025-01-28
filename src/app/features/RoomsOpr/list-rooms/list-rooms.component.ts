@@ -17,8 +17,9 @@ export class ListRoomsComponent implements OnInit {
   rooms$?: Observable<Room[]>
   paginatedRooms: Room[] = []; // Array to store current page rooms
   currentPage: number = 1; // Track current page
-  itemsPerPage: number = 5;  // Number of rooms per page
-  totalPages: number = 1;
+  pageSize: number = 6;  // Number of rooms per page
+  totalPages: number = 0;
+  pages: number[] = [];
 
   constructor(private roomService: RoomService) {
 
@@ -27,7 +28,25 @@ export class ListRoomsComponent implements OnInit {
   
   ngOnInit(): void {
     this.rooms$ = this.roomService.getAllRoom();
+    this.rooms$.subscribe((data) => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updatePaginatedRooms(data);
+    });
     
   }
+
+  updatePaginatedRooms(rooms: Room[]): void {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.paginatedRooms = rooms.slice(startIndex, endIndex);
+    }
+  
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.rooms$?.subscribe((data) => this.updatePaginatedRooms(data));
+      }
+    }
 
 }

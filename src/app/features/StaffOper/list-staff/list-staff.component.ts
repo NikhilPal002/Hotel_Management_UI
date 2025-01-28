@@ -13,9 +13,16 @@ import { RouterModule } from '@angular/router';
   templateUrl: './list-staff.component.html',
   styleUrl: './list-staff.component.css'
 })
+
+
 export class ListStaffComponent implements OnInit {
 
   staff$?:Observable<Staff[]>;
+  paginatedStaffs: Staff[] = [];
+    currentPage: number = 1;
+    pageSize: number = 5;
+    totalPages: number = 0;
+    pages: number[] = [];
 
   constructor(private staffService:StaffService){
 
@@ -23,8 +30,26 @@ export class ListStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.staff$ = this.staffService.getAllStaff();
+    this.staff$.subscribe((data) => {
+      this.totalPages = Math.ceil(data.length / this.pageSize);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updatePaginatedStaffs(data);
+    });
       
   }
+
+  updatePaginatedStaffs(staffs: Staff[]): void {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.paginatedStaffs = staffs.slice(startIndex, endIndex);
+    }
+  
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.staff$?.subscribe((data) => this.updatePaginatedStaffs(data));
+      }
+    }
 
 
 }
