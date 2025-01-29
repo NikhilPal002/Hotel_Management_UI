@@ -6,7 +6,6 @@ import { BillingService } from '../services/billing.service';
 import { Billing } from '../models/billing.model';
 import { Service } from '../models/service.model';
 import { Subscription } from 'rxjs';
-import { PaymentService } from '../../PaymentOper/services/payment.service';
 
 @Component({
   selector: 'app-view-bill',
@@ -26,7 +25,6 @@ export class ViewBillComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private billingService: BillingService,
     private router: Router,
-    private paymentService: PaymentService
   ) { }
 
   ngOnInit(): void {
@@ -49,23 +47,12 @@ export class ViewBillComponent implements OnInit, OnDestroy {
     });
   }
 
-   // Function to handle payment processing
-   proceedToPayment(): void {
-    if (!this.bills) return;
-
-    alert(`Proceeding to payment for Billing ID: ${this.bills.billingId}`);
-
-    // ✅ Redirect to payment gateway or update the API to mark as paid
-    this.paymentService.updatePaymentStatus(this.bills.billingId, 'Completed').subscribe({
-      next: () => {
-        alert('Payment Successful!');
-        this.bills!.paymentStatus = 'Completed'; // Update UI instantly
-      },
-      error: (error) => {
-        console.error('Error processing payment:', error);
-        alert('Payment failed. Please try again.');
-      }
-    });
+  proceedToPayment() {
+    if (this.billingId) {
+      this.router.navigate([`/receptionist/payment/${this.billingId}`]);
+    } else {
+      console.error('Billing ID is not available.');
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,23 +1,29 @@
 <div class="container">
-    <h3 class="payment-heading">Make Payment</h3>
-    <form #form="ngForm" (ngSubmit)="onFormSubmit()">
-        <div class="payment-field">
-            <div class="mb-3">
-                <label class="input-label">Payment Methdod</label>
-                <select class="form-select" id="status" name="status" [(ngModel)]="model.paymentMethod">
-                    <option selected>Choose...</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Credit Card">Credit Card</option>
-                    <option value="UPI">UPI</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="inputPassword5" class="form-label">Billing Id</label>
-                <input type="number" id="billingid" name="billingid" class="form-control" 
-                    placeholder="0" [(ngModel)]="model.billingId">
-            </div>
+    <div>
+      <h1>Payment Page</h1>
+    </div>
+    <div class="card">
+      <div *ngIf="billing">
+        <h4>Bill Details:</h4>
+        <p><strong>Billing ID:</strong> {{ billing.billingId }}</p>
+        <p><strong>Total Cost:</strong> {{ billing.totalCost | currency: 'INR': 'symbol' }}</p>
+        
+      <form #Form="ngForm" (ngSubmit)="makePayment()">
 
-            <button type="submit" class="btn btn-primary">Pay</button>
-        </div>
-    </form>
-</div>
+        <label for="paymentMethod">Payment Method:</label>
+        <select id="paymentMethod" [(ngModel)]="paymentMethod" name="paymentMethod">
+          <option value="Card">Card</option>
+          <option value="Cash">Cash</option>
+          <option value="Net Banking">Net Banking</option>
+          <option value="UPI">UPI</option>
+        </select>
+        
+        <button type="submit" [disabled]="payment.paymentAmount <= 0">Make Payment</button>
+      </form>
+      </div>
+
+      <div *ngIf="!billing">
+        <p>Loading bill details...</p>
+      </div>
+    </div>
+  </div>

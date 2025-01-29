@@ -102,7 +102,7 @@ export const routes: Routes = [
         canActivate:[authGuard]
     },
     {
-        path: 'receptionist/payment',
+        path: 'receptionist/payment/:billingId',
         component: PaymentComponent,
         canActivate:[authGuard]
     },
