@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BillingService } from '../services/billing.service';
 import { Service } from '../models/service.model';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-billing',
-  imports: [RouterModule,FormsModule,CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './billing.component.html',
   styleUrls: ['./billing.component.css']
 })
@@ -23,7 +23,9 @@ export class BillingComponent implements OnInit {
   generatedBill: any = null;
   errorMessage: string = '';
 
-  constructor(private billingService: BillingService) {}
+  constructor(private billingService: BillingService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // Fetch the services from the server
@@ -53,14 +55,16 @@ export class BillingComponent implements OnInit {
     }
 
     // Pass the selected service IDs to the API
-    this.billingService.generateBill(this.billingData, this.selectedServiceIds).subscribe(
-      (bill) => {
-        this.generatedBill = bill;
-        this.errorMessage = '';
-      },
-      (error) => {
-        this.errorMessage = 'Error generating bill.';
-      }
-    );
+    this.billingService.generateBill(this.billingData, this.selectedServiceIds)
+      .subscribe({
+        next: () => {
+          alert("Bill Generated");
+          this.router.navigateByUrl('receptionist/billinglist')
+        },
+        error: (error) => {
+          this.errorMessage = 'Error generating bill.';
+        }
+
+      })
   }
 }

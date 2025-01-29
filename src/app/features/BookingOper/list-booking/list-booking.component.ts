@@ -66,17 +66,17 @@ export class ListBookingComponent implements OnInit {
   }
 
   updatePaginatedBookings(bookings: Booking[]): void {
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      this.paginatedBookings = bookings.slice(startIndex, endIndex);
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedBookings = bookings.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.booking$?.subscribe((data) => this.updatePaginatedBookings(data));
     }
-  
-    changePage(page: number): void {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-        this.booking$?.subscribe((data) => this.updatePaginatedBookings(data));
-      }
-    }
+  }
 
 
   onDelete(id: number): void {

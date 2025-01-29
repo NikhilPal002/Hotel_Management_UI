@@ -1,0 +1,67 @@
+<div class="container">
+    <h1 class="mt-3">Billing List</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/receptionist/billing']" class="btn btn-primary">Generate Bill</a>
+    </div>
+    <div class="table-wrapper">
+        <!-- Async pipe to handle data -->
+        <ng-container *ngIf="paginatedBills.length > 0; else noBills">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Bill Id</th>
+                        <th>Billing Number</th>
+                        <th>Booking Id</th>
+                        <th>Guest Name</th>
+                        <th>Room Cost</th>
+                        <th>Taxes</th>
+                        <th>Total Cost</th>
+                        <th>Payment Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let billing of paginatedBills">
+                        <td>{{ billing.billingId }}</td>
+                        <td>{{ billing.billingNo }}</td>
+                        <td>{{ billing.bookingId}}</td>
+                        <td>{{ billing.guestName}}</td>
+                        <td>{{ billing.roomCost| currency }}</td>
+                        <td>{{ billing.taxes | currency }}</td>
+                        <td>{{ billing.totalCost | currency }}</td>
+                        <td>{{ billing.paymentStatus }}</td>
+                        <td>
+                            <button class="btn btn-danger" (click)="viewBill(billing.billingId)">
+                                View Bill
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+    </div>
+
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-3" *ngIf="totalPages > 1">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Show message if no bookings -->
+    <ng-template #noBills>
+        <div class="alert alert-info mt-3">
+            No bills found.
+        </div>
+    </ng-template>
+</div>

@@ -20,6 +20,8 @@ import { PaymentComponent } from './features/PaymentOper/payment/payment.compone
 import { authGuard } from './features/login/guards/auth.guard';
 import { SearchRoomComponent } from './features/SearchRoom/search-room/search-room.component';
 import { BillingComponent } from './features/BillingOper/billing/billing.component';
+import { BillListComponent } from './features/BillingOper/bill-list/bill-list.component';
+import { ViewBillComponent } from './features/BillingOper/view-bill/view-bill.component';
 
 
 export const routes: Routes = [
@@ -113,6 +115,16 @@ export const routes: Routes = [
     {
         path: 'receptionist/billing',
         component: BillingComponent,
+        canActivate:[authGuard]
+    },
+    {
+        path: 'receptionist/billinglist',
+        component: BillListComponent,
+        canActivate:[authGuard]
+    },
+    {
+        path: 'receptionist/view-bill/:billingId',
+        component: ViewBillComponent,
         canActivate:[authGuard]
     },
     

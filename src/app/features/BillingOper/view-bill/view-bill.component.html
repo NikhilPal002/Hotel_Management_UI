@@ -1,0 +1,44 @@
+<div class="container" *ngIf="bills">
+    <h2 class="text-center">Bill Details</h2>
+    <div class="bill-template">
+        <div class="bill-header">
+            <h3>Hotel Management System</h3>
+            <p>Billing ID: {{ bills.billingId }}</p>
+            <p>Reservation ID: {{ bills.bookingId }}</p>
+        </div>
+
+        <div class="bill-body">
+            <h4>Guest Details:</h4>
+            <p><strong>Guest Name:</strong> {{ bills.guestName }}</p>
+            <p><strong>Room Number:</strong> {{ bills.roomNumber }}</p>
+            <!-- <p><strong>Room Type:</strong> {{ bills.roomType }}</p>
+            <p><strong>Check-In Date:</strong> {{ bills.checkInDate | date:'shortDate' }}</p>
+            <p><strong>Check-Out Date:</strong> {{ bills.checkOutDate | date:'shortDate' }}</p>
+            <p><strong>No. of Guests:</strong> {{ bills.noOfGuests }}</p> -->
+
+            <h4>Cost Breakdown:</h4>
+            <p><strong>Room Cost:</strong> {{ bills.roomCost | currency:'INR':'symbol' }}</p>
+            <p><strong>Taxes:</strong> {{ bills.taxes | currency:'INR':'symbol' }}</p>
+            <p><strong>Total Service Charge:</strong> {{ bills.serviceCost| currency:'INR':'symbol' }}</p>
+            <p><strong>Total Cost:</strong> {{ bills.totalCost | currency:'INR':'symbol' }}</p>
+
+
+            <h4>Services Included:</h4>
+            <ul *ngIf="services.length > 0; else noServices">
+                <li *ngFor="let service of services">
+                    <strong>{{ service.serviceName }}</strong> - {{ service.serviceCost | currency:'INR':'symbol' }}
+                </li>
+            </ul>
+
+            <h4>Billing Information:</h4>
+            <p><strong>Payment Status:</strong> {{ bills.paymentStatus }}</p>
+            <ng-template #noServices>
+                <p>No additional services included.</p>
+            </ng-template>
+        </div>
+
+        <div class="payment-btn" *ngIf="bills.paymentStatus === 'Pending'">
+            <button (click)="proceedToPayment()">Proceed to Payment</button>
+        </div>
+    </div>
+</div>
