@@ -1,109 +1,120 @@
-/* General Styling */
+/* General Styles */
 .container {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
- 
-  /* Header Styling */
-  .bill-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
- 
-  .bill-header h3 {
-    margin: 0;
-    font-size: 1.8em;
-    color: #333;
-  }
- 
-  .bill-header p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #666;
-  }
- 
-  /* Section Styling */
-  .bill-body {
-    line-height: 1.6;
-  }
- 
-  .bill-body h4 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #444;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-    font-size: 1.2em;
-  }
- 
-  .bill-body p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #333;
-  }
- 
-  /* Cost Breakdown */
-  .bill-body strong {
-    color: #222;
-  }
- 
-  /* Services List */
-  .bill-body ul {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
- 
-  .bill-body ul li {
-    list-style-type: disc;
-    margin-bottom: 5px;
-    font-size: 1em;
-    color: #444;
-  }
- 
-  /* Text Centering */
-  .text-center {
-    text-align: center;
-  }
- 
-  /* Styling for Highlighting Costs */
-  .bill-body .cost-highlight {
-    color: #007bff;
-    font-weight: bold;
-  }
- 
-  /* Print Style */
-  @media print {
-    .container {
-      border: none;
-      box-shadow: none;
-      background-color: #fff;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
- 
-    .bill-header,
-    .bill-body {
-      page-break-inside: avoid;
-    }
- 
-    .bill-body h4 {
-      border: none;
-      padding-bottom: 0;
-    }
- 
-    ul {
-      padding-left: 15px;
-    }
- 
-    body {
-      font-size: 12px;
-      line-height: 1.5;
-    }
-  }
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f8f9fa;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+h2.text-center {
+  text-align: center;
+  color: #222;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Bill Template */
+.bill-template {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bill-header {
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+}
+
+.bill-header h3 {
+  margin: 0;
+  color: #1434A4;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.bill-header p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Bill Body */
+.bill-body {
+  margin-top: 20px;
+}
+
+.bill-body h4 {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.bill-body p {
+  font-size: 16px;
+  color: #333;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.bill-body strong {
+  color: #000;
+}
+
+/* Services List */
+.bill-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bill-body ul li {
+  background: #e9ecef;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 8px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+}
+
+.bill-body ul li:hover {
+  background: #d6d8db;
+}
+
+/* Payment Button */
+.payment-btn {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.payment-btn button {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+  font-size: 18px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.payment-btn button:hover {
+  background: linear-gradient(135deg, #218838, #1e7e34);
+  transform: scale(1.05);
+}

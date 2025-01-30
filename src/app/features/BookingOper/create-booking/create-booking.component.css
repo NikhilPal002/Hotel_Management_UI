@@ -1,21 +1,24 @@
-.container{
+.container {
     width: 100%;
     max-width: 500px;
-    margin : 30px auto;
+    margin: 30px auto;
     padding: 20px;
-    background-color:rgba(245, 245, 247, 0.968);
-    /* border: 2px solid #007bff; */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    background-color: rgba(245, 245, 247, 0.968);
+    background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
 .room-heading {
     text-align: center;
-    font-size: 24px;
+    color: #1434A4;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #1434A4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Form fields styling */
@@ -60,45 +63,48 @@
 }
 
 /* Additional layout for smaller sections */
-.col-md-6, .col-md-2 {
+.col-md-6,
+.col-md-2 {
     margin-bottom: 15px;
 }
 
-#inputCity, #inputZip {
+#inputCity,
+#inputZip {
     width: 100%;
 }
 
 /* Styling for the button container */
 .col-12 {
-    text-align: center; 
-    margin-top: 20px;   
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Styling for the submit button */
 .btn {
-    width: 100%; 
-    max-width: 200px; 
+    width: 100%;
+    max-width: 200px;
     padding: 10px 20px;
-    font-size: 16px; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    color: #fff; 
-    border: none; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease, transform 0.2s ease; 
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #25cbd7, #069ba5);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary{
-    background-color:  #25cbd7;
-}
+
 /* Hover and focus effects */
 .btn:hover {
-    background-color: #e58900; 
-    transform: scale(1.05); 
+    background: linear-gradient(135deg, #e58900, #c27603dc);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 .btn:focus {
-    outline: none; 
-    box-shadow: 0 0 5px #25cbd7; 
+    outline: none;
+    box-shadow: 0 0 5px #25cbd7;
 }

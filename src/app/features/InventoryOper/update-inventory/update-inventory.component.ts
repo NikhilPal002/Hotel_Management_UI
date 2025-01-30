@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Inventory } from '../models/list-inventory.model';
 import { Subscription } from 'rxjs';
 import { InventoryService } from '../services/inventory.service';
-import { response } from 'express';
 import { UpdateInventory } from '../models/update-inventory.model';
 
 @Component({
@@ -17,11 +16,13 @@ import { UpdateInventory } from '../models/update-inventory.model';
 })
 export class UpdateInventoryComponent implements OnInit, OnDestroy {
 
-  id: number | null = null;
   paramsSubscription?: Subscription;
   updateInventorySubscription?: Subscription;
   inventory?: Inventory;
   formattedLastUpdated: string = '';
+
+  @Input() inventoryId: number | null = null;
+  @Output() closePopup = new EventEmitter<void>();
 
 
   constructor(private route: ActivatedRoute,
@@ -31,32 +32,25 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.paramsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        const idParam = params.get('id');
-        this.id = idParam ? parseInt(idParam, 10) : null;
 
-        if (this.id) {
-          this.inventoryService.getInventoryById(this.id)
-            .subscribe({
-              next: (response) => {
-                this.inventory = response;
-
-                // Format lastUpdated for datetime-local
-                if (this.inventory.lastUpdated) {
-                  const date = new Date(this.inventory.lastUpdated);
-                  this.formattedLastUpdated = date.toISOString().slice(0, 16);
-                }
-              },
-              error: (err) => {
-                console.error('Failed to fetch inventory details:', err);
-                alert('Inventory not found.');
-              },
-            });
-        }
-      }
-    });
+    if (this.inventoryId) {
+      this.paramsSubscription = this.inventoryService.getInventoryById(this.inventoryId)
+        .subscribe({
+          next: (response) => {
+            this.inventory = response;
+            if (this.inventory.lastUpdated) {
+              const date = new Date(this.inventory.lastUpdated);
+              this.formattedLastUpdated = date.toISOString().slice(0, 16);
+            }
+          },
+          error: (err) => {
+            console.error('Failed to fetch inventory details:', err);
+            alert('Inventory not found.');
+          },
+        });
+    }
   }
+
 
   onFormSubmit(): void {
 
@@ -73,12 +67,12 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
     }
 
 
-    if (this.id) {
-      this.updateInventorySubscription = this.inventoryService.updateInventory(this.id, updateInventory)
+    if (this.inventoryId) {
+      this.updateInventorySubscription = this.inventoryService.updateInventory(this.inventoryId, updateInventory)
         .subscribe({
           next: (response) => {
             alert('Inventory updated successfully.');
-            this.router.navigateByUrl('/manager/inventory')
+            this.closePopup.emit();
           },
           error: (error) => {
             console.error('Update failed:', error);
@@ -91,14 +85,15 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
 
 
   onDelete(): void {
-    if (this.id) {
-      this.inventoryService.deleteInventory(this.id)
-      .subscribe({
-        next: (response) => {
-          alert('Inventory deleted successfully.');
-          this.router.navigateByUrl('/manager/inventory');
-        }
-      });
+    if (this.inventoryId) {
+      this.inventoryService.deleteInventory(this.inventoryId)
+        .subscribe({
+          next: (response) => {
+            alert('Inventory deleted successfully.');
+            this.closePopup.emit();
+            this.router.navigateByUrl('/manager/inventory');
+          }
+        });
     }
   }
 

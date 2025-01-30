@@ -1,8 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component,EventEmitter,Output, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddGuest } from '../models/add-guest.model';
 import { GuestService } from '../services/guest.service';
-import { response} from 'express';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -15,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './guests.component.css'
 })
 export class GuestsComponent implements OnDestroy {
+  @Output() guestAdded = new EventEmitter<void>();
   model: AddGuest;
 
   private addGuestSubscription?: Subscription;
@@ -36,8 +36,13 @@ export class GuestsComponent implements OnDestroy {
     this.addGuestSubscription = this.guestService.addGuest(this.model)
     .subscribe({
       next: (response)=>{
+        alert('Guest added successfully!');
+        this.guestAdded.emit();
         this.router.navigateByUrl('/receptionist/guest');
       },
+      error: (error) => {
+        alert('Guest add failed!');
+      }
     })
   }
 

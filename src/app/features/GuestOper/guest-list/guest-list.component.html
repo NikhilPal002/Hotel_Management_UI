@@ -2,7 +2,7 @@
     <h1 class="mt-3">Guest List</h1>
 
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/receptionist/guest/add']" class="btn btn-primary">Add Guest</a>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGuestModal">Add Guest</button>
     </div>
 
     <ng-container *ngIf="paginatedGuests.length > 0">
@@ -29,31 +29,64 @@
                     <td>{{ guest.state }}</td>
                     <td>{{ guest.pinCode }}</td>
                     <td>
-                        <a class="btn btn-light" [routerLink]="['/receptionist/guest/update/', guest.guestId]">Edit</a>
+                        <button class="btn btn-light" (click)="openEditGuestModal(guest.guestId)">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Pagination Controls -->
-        <div class="pagination-container mt-3">
-            <ul class="pagination">
-                <li *ngIf="currentPage > 1">
-                    <a (click)="changePage(currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pages" [class.active]="page === currentPage">
-                    <a (click)="changePage(page)">{{ page }}</a>
-                </li>
-                <li *ngIf="currentPage < totalPages">
-                    <a (click)="changePage(currentPage + 1)">Next</a>
-                </li>
-            </ul>
-        </div>
     </ng-container>
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-3">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Show message if no inventories -->
+    <!-- Show message if no guests -->
     <div *ngIf="paginatedGuests.length === 0" class="alert alert-info mt-3">
-        No items in inventory.
+        No guests found.
+    </div>
+
+    <!-- Bootstrap Modal for Add Guest Form -->
+    <div class="modal fade" id="addGuestModal" tabindex="-1" aria-labelledby="addGuestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="addGuestModalLabel">Add Guest</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()" ></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Load AddGuestComponent -->
+                    <app-guests (guestAdded)="closeModal()"></app-guests>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Edit Guest Form -->
+    <div class="modal fade" id="editGuestModal" tabindex="-1" aria-labelledby="editGuestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editGuestModalLabel">Edit Details</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="closeEditModal()" ></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pass selectedGuestId to UpdateGuestComponent -->
+                    <app-update-guest *ngIf="selectedGuestId" [guestId]="selectedGuestId"
+                        (closePopup)="closeEditModal()"></app-update-guest>
+                </div>
+            </div>
+        </div>
     </div>
 
 

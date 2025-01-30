@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BillingService } from '../services/billing.service';
 import { Service } from '../models/service.model';
 import { Router, RouterModule } from '@angular/router';
@@ -22,6 +22,8 @@ export class BillingComponent implements OnInit {
   selectedServiceIds: number[] = [];
   generatedBill: any = null;
   errorMessage: string = '';
+
+  @Output() billAdded = new EventEmitter<void>();
 
   constructor(private billingService: BillingService,
     private router: Router
@@ -59,6 +61,7 @@ export class BillingComponent implements OnInit {
       .subscribe({
         next: () => {
           alert("Bill Generated");
+          this.billAdded.emit();
           this.router.navigateByUrl('receptionist/billinglist')
         },
         error: (error) => {

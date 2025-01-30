@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GuestService } from '../services/guest.service';
@@ -6,7 +6,6 @@ import { Guest } from '../models/guest.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UpdateGuest } from '../models/update-guest.model';
-import { response } from 'express';
 
 @Component({
   selector: 'app-update-guest',
@@ -17,11 +16,12 @@ import { response } from 'express';
 })
 export class UpdateGuestComponent implements OnInit, OnDestroy {
 
-  id: number | null = null;
   paramsSubscription?: Subscription;
   updateGuestSubscription?: Subscription;
   guest?: Guest;
 
+  @Input() guestId: number | null = null;
+  @Output() closePopup = new EventEmitter<void>();
 
   constructor(private route: ActivatedRoute,
     private guestService: GuestService,
@@ -29,24 +29,22 @@ export class UpdateGuestComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.paramsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        const idParam = params.get('id');
-        this.id = idParam ? parseInt(idParam, 10) : null;
-
-        if (this.id) {
-          this.guestService.getGuestById(this.id)
-            .subscribe({
-              next: (response) => {
-                this.guest = response;
-              }
-            });
-        }
-      }
-    });
+    if (this.guestId) {  // Directly use the Input() guestId
+      this.paramsSubscription = this.guestService.getGuestById(this.guestId)
+        .subscribe({
+          next: (response) => {
+            this.guest = response;
+          },
+          error: () => {
+            alert('Guest not found!');
+          }
+        });
+    }
   }
 
   onFormSubmit(): void {
+    if (!this.guest) return;
+
     const updateGuest: UpdateGuest = {
       guestName: this.guest?.guestName ?? '',
       gender: this.guest?.gender ?? '',
@@ -56,11 +54,12 @@ export class UpdateGuestComponent implements OnInit, OnDestroy {
       pinCode: this.guest?.pinCode ?? '',
     }
 
-    if (this.id) {
-      this.updateGuestSubscription = this.guestService.updateGuest(this.id, updateGuest)
+    if (this.guestId) {
+      this.updateGuestSubscription = this.guestService.updateGuest(this.guestId, updateGuest)
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/receptionist/guest')
+            alert('Guest updated successfully!');
+            this.closePopup.emit();
           },
           error: (error) => {
             console.error('Update failed:', error);
@@ -71,13 +70,15 @@ export class UpdateGuestComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    if (this.id) {
-      this.guestService.deleteGuest(this.id)
-      .subscribe({
-        next:(response)=>{
-          this.router.navigateByUrl('/receptionist/guest')
-        }
-      });
+    if (this.guestId) {
+      this.guestService.deleteGuest(this.guestId)
+        .subscribe({
+          next: (response) => {
+            alert('Guest deleted successfully!');
+            this.closePopup.emit();
+            this.router.navigateByUrl('/receptionist/guest')
+          }
+        });
     }
   }
 

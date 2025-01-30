@@ -152,6 +152,40 @@ h1 {
     margin-top: 20px;
 }
 
+.modal-header {
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.btn-close {
+    font-size: 1.25rem;
+    color: #000;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-content {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Additional styling for the modal when the form is open */
+.modal.fade .modal-dialog {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.fade.show .modal-dialog {
+    opacity: 1;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .table thead th {

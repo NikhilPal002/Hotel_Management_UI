@@ -2,10 +2,10 @@
     <h1 class="mt-3">Staff List</h1>
 
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/manager/staff/add']" class="btn btn-primary" >Add Staff</a>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">Add Staff</button>
     </div>
 
-    <ng-container *ngIf="paginatedStaffs.length > 0" >
+    <ng-container *ngIf="paginatedStaffs.length > 0">
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let staff of paginatedStaffs" >
+                <tr *ngFor="let staff of paginatedStaffs">
                     <td>{{staff.staffId}}</td>
                     <td>{{staff.fullName}}</td>
                     <td>{{staff.email}}</td>
@@ -33,31 +33,68 @@
                     <td>{{staff.joinDate | date:'yyyy-MM-dd'}}</td>
                     <td>{{staff.nic}}</td>
                     <td>
-                        <a class="btn btn-light" [routerLink]="['/manager/staff/update',staff.staffId]" >Edit</a>
+                        <button class="btn btn-light" (click)="openEditStaffModal(staff.staffId)">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Pagination Controls -->
-        <div class="pagination-container mt-3">
-            <ul class="pagination">
-                <li *ngIf="currentPage > 1">
-                    <a (click)="changePage(currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pages" [class.active]="page === currentPage">
-                    <a (click)="changePage(page)">{{ page }}</a>
-                </li>
-                <li *ngIf="currentPage < totalPages">
-                    <a (click)="changePage(currentPage + 1)">Next</a>
-                </li>
-            </ul>
-        </div>
     </ng-container>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-3">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Show message if no inventories -->
     <div *ngIf="paginatedStaffs.length === 0" class="alert alert-info mt-3">
         No staff available.
     </div>
+
+    <!-- Bootstrap Modal for Add Guest Form -->
+    <div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="addStaffModalLabel">Add Staff</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Load AddGuestComponent -->
+                    <app-add-staff (staffAdded)="closeModal()"></app-add-staff>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Edit Guest Form -->
+    <div class="modal fade" id="editStaffModal" tabindex="-1" aria-labelledby="editStaffModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editStaffModalLabel">Edit Details</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeEditModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pass selectedGuestId to UpdateGuestComponent -->
+                    <app-update-staff *ngIf="selectedStaffId" [staffId]="selectedStaffId"
+                        (closePopup)="closeEditModal()"></app-update-staff>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>

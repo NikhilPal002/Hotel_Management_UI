@@ -2,10 +2,11 @@
     <h1 class="mt-3">Room List</h1>
 
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/manager/room/add']" class="btn btn-primary" >Add Room</a>
+        <!-- <a [routerLink]="['/manager/room/add']" class="btn btn-primary" >Add Room</a> -->
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
     </div>
 
-    <ng-container *ngIf="paginatedRooms.length > 0" >
+    <ng-container *ngIf="paginatedRooms.length > 0">
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -19,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let room of paginatedRooms" >
+                <tr *ngFor="let room of paginatedRooms">
                     <td>{{room.roomId}}</td>
                     <td>{{room.roomType}}</td>
                     <td>{{room.description}}</td>
@@ -27,30 +28,65 @@
                     <td>${{room.pricePerNight}}</td>
                     <td>{{room.status}}</td>
                     <td>
-                        <a class="btn btn-light" [routerLink]="['/manager/room/update',room.roomId]" >Edit</a>
+                        <!-- <a class="btn btn-light" [routerLink]="['/manager/room/update',room.roomId]">Edit</a> -->
+                        <button class="btn btn-light" (click)="openEditRoomModal(room.roomId)">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Pagination Controls -->
-        <div class="pagination-container mt-3">
-            <ul class="pagination">
-                <li *ngIf="currentPage > 1">
-                    <a (click)="changePage(currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pages" [class.active]="page === currentPage">
-                    <a (click)="changePage(page)">{{ page }}</a>
-                </li>
-                <li *ngIf="currentPage < totalPages">
-                    <a (click)="changePage(currentPage + 1)">Next</a>
-                </li>
-            </ul>
-        </div>
     </ng-container>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-3">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </div>
 
     <div *ngIf="paginatedRooms.length === 0" class="alert alert-info mt-3">
         No rooms available.
     </div>
 
-</div>
+    <!-- Bootstrap Modal for Add Guest Form -->
+    <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="addRoomModalLabel">Add Room</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Load AddGuestComponent -->
+                    <app-add-rooms (roomAdded)="closeModal()"></app-add-rooms>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Edit Guest Form -->
+    <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="editRoomModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editRoomModalLabel">Edit Details</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeEditModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pass selectedGuestId to UpdateGuestComponent -->
+                    <app-update-rooms *ngIf="selectedRoomId" [roomId]="selectedRoomId"
+                        (closePopup)="closeEditModal()"></app-update-rooms>
+                </div>
+            </div>
+
+        </div>

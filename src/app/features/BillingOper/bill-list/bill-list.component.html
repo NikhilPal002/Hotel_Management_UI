@@ -2,7 +2,7 @@
     <h1 class="mt-3">Billing List</h1>
 
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/receptionist/billing']" class="btn btn-primary">Generate Bill</a>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBillModal">Generate Bill</button>
     </div>
     <div class="table-wrapper">
         <!-- Async pipe to handle data -->
@@ -64,4 +64,21 @@
             No bills found.
         </div>
     </ng-template>
+
+    <!-- Bootstrap Modal for Add Guest Form -->
+    <div class="modal fade" id="addBillModal" tabindex="-1" aria-labelledby="addBillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="addBillModalLabel">Bill</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()" ></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Load AddGuestComponent -->
+                    <app-billing (billAdded)="closeModal()"></app-billing>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

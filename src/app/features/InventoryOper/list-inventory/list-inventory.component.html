@@ -2,7 +2,8 @@
     <h1 class="mt-3">Inventory List</h1>
 
     <div class="d-flex justify-content-end mt-3">
-        <a [routerLink]="['/manager/inventory/add']" class="btn btn-primary">Add Item</a>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">Add Item</button>
+        <!-- <a [routerLink]="['/manager/inventory/add']" class="btn btn-primary">Add Item</a> -->
     </div>
 
     <ng-container *ngIf="paginatedInventories.length > 0">
@@ -25,30 +26,70 @@
                     <td>{{i.category}}</td>
                     <td>{{i.lastUpdated | date: 'medium' }}</td>
                     <td>
-                        <a class="btn btn-light" [routerLink]="['/manager/inventory/update',i.inventoryId]">Edit</a>
+                        <button class="btn btn-light" (click)="openEditInventoryModal(i.inventoryId)">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Pagination Controls -->
-        <div class="pagination-container mt-3">
-            <ul class="pagination">
-                <li *ngIf="currentPage > 1">
-                    <a (click)="changePage(currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pages" [class.active]="page === currentPage">
-                    <a (click)="changePage(page)">{{ page }}</a>
-                </li>
-                <li *ngIf="currentPage < totalPages">
-                    <a (click)="changePage(currentPage + 1)">Next</a>
-                </li>
-            </ul>
-        </div>
     </ng-container>
+    <!-- Pagination Controls -->
+    <div class="pagination-container mt-3">
+        <ul class="pagination">
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a (click)="changePage(page)">{{ page }}</a>
+            </li>
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Show message if no inventories -->
     <div *ngIf="paginatedInventories.length === 0" class="alert alert-info mt-3">
         No items in inventory.
     </div>
+
+
+    <!-- Bootstrap Modal for Add Guest Form -->
+    <div class="modal fade" id="addInventoryModal" tabindex="-1" aria-labelledby="addInventoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="addInventoryModalLabel">Add Inventory</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Load AddGuestComponent -->
+                    <app-add-inventory (inventoryAdded)="closeModal()"></app-add-inventory>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Edit Guest Form -->
+    <div class="modal fade" id="editInventoryModal" tabindex="-1" aria-labelledby="editInventoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editInventoryModalLabel">Edit Details</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeEditModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Pass selectedGuestId to UpdateGuestComponent -->
+                    <app-update-inventory *ngIf="selectedInventoryId" [inventoryId]="selectedInventoryId"
+                        (closePopup)="closeEditModal()"></app-update-inventory>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

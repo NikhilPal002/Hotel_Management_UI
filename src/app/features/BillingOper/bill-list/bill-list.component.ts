@@ -1,17 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Billing } from '../models/billing.model';
 import { BillingService } from '../services/billing.service';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BillingComponent } from "../billing/billing.component";
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-bill-list',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule, BillingComponent],
   templateUrl: './bill-list.component.html',
-  styleUrls: ['./bill-list.component.css'] 
+  styleUrls: ['./bill-list.component.css']
 })
 export class BillListComponent implements OnInit, OnDestroy {
   billings$: Observable<Billing[]> | undefined;
@@ -21,15 +24,22 @@ export class BillListComponent implements OnInit, OnDestroy {
   pageSize = 5;
   totalPages = 0;
   pages: number[] = [];
-  subscription?: Subscription; 
+  subscription?: Subscription;
+
+  @ViewChild('addBillModal', { static: false }) addBillModal!: ElementRef;
+
 
   constructor(
     private billingService: BillingService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.loadBills();
+  }
+
+  loadBills(): void {
     this.billings$ = this.billingService.getAllBills();
     this.subscription = this.billings$.subscribe((data: Billing[]) => {
       if (data && data.length > 0) {
@@ -56,14 +66,31 @@ export class BillListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ✅ Method to navigate to View Bill with correct billingId
+  // Method to navigate to View Bill with correct billingId
   viewBill(billingId: number): void {
     if (billingId) {
       this.router.navigate(['/receptionist/view-bill', billingId]); // Ensures correct navigation
     }
   }
 
+  closeModal() {
+    let modalElement = document.getElementById('addBillModal')
+    if (modalElement) {
+
+      document.body.focus();
+
+      let modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+
+      this.loadBills();
+    }
+  }
+
   ngOnDestroy(): void {
     this.subscription?.unsubscribe(); // ✅ Prevents memory leaks
   }
+
+
 }

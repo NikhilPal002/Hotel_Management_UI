@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Staff } from '../models/list-staff.model';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -15,10 +15,12 @@ import { UpdateStaff } from '../models/update-staff.model';
 })
 export class UpdateStaffComponent implements OnInit, OnDestroy {
 
-  id: number | null = null;
-  ParamsSubscription?: Subscription;
+  paramsSubscription?: Subscription;
   updateStaffSubscription?: Subscription;
   staff?: Staff;
+
+  @Input() staffId:number | null = null;
+  @Output() closePopup = new EventEmitter<void>();
 
 
   constructor(private route: ActivatedRoute,
@@ -27,31 +29,26 @@ export class UpdateStaffComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.ParamsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        const idParam = params.get('id');
-        this.id = idParam ? parseInt(idParam, 10) : null;
-
-        if (this.id) {
-          this.staffService.getStaffById(this.id)
+    if (this.staffId) {
+    this.paramsSubscription = this.staffService.getStaffById(this.staffId)
             .subscribe({
               next: (response) => {
                 this.staff = response;
               },
               error: (err) => {
-                console.error('Failed to fetch room details:', err);
-                alert('Room not found.');
+                alert('Staff not found.');
               },
             });
         }
       }
-    });
-
-  }
 
   onFormSubmit(): void {
-    const updateStaff: UpdateStaff = {
+    if(!this.staff) {
+      alert("Staff details not available");
+      return;
+    }
 
+    const updateStaff: UpdateStaff = {
       fullName: this.staff?.fullName ?? '',
       email: this.staff?.email ?? '',
       age: this.staff?.age ?? 0,
@@ -61,11 +58,12 @@ export class UpdateStaffComponent implements OnInit, OnDestroy {
     }
 
 
-    if(this.id){
-      this.updateStaffSubscription = this.staffService.updateStaff(this.id,updateStaff)
+    if(this.staffId){
+      this.updateStaffSubscription = this.staffService.updateStaff(this.staffId,updateStaff)
       .subscribe({
         next: (response) => {
-          this.router.navigateByUrl('/manager/staff')
+          alert("Staff updated successfully");
+          this.closePopup.emit();
         },
         error: (error) => {
           console.error('Update failed:', error);
@@ -78,10 +76,12 @@ export class UpdateStaffComponent implements OnInit, OnDestroy {
 
 
   onDelete() {
-    if (this.id) {
-      this.staffService.deleteStaff(this.id)
+    if (this.staffId) {
+      this.staffService.deleteStaff(this.staffId)
       .subscribe({
         next:(response)=>{
+          alert("Guest deleted successfully!");
+          this.closePopup.emit();
           this.router.navigateByUrl('/manager/staff')
         }
       });
@@ -90,7 +90,8 @@ export class UpdateStaffComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.ParamsSubscription?.unsubscribe();
+    this.paramsSubscription?.unsubscribe();
+    this.updateStaffSubscription?.unsubscribe();
   }
 
 }

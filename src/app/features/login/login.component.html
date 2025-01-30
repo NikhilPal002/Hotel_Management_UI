@@ -1,18 +1,29 @@
 <div class="container">
     <h3 class="login-heading">Login</h3>
     <div class="login-form">
-        <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <form #form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
             <div class="login-field">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" [(ngModel)]="model.email" >
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" 
+                        placeholder="name@example.com" [(ngModel)]="model.email" 
+                        required email #emailRef="ngModel">
+                    <div class="error-message" *ngIf="emailRef.invalid && emailRef.touched">
+                        <small *ngIf="emailRef.errors?.['required']">Email is required.</small>
+                        <small *ngIf="emailRef.errors?.['email']">Invalid email format.</small>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control"  placeholder="password" [(ngModel)]="model.passwordHash" >
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control"  
+                        placeholder="password" [(ngModel)]="model.passwordHash" 
+                        required minlength="6" #passwordRef="ngModel">
+                    <div class="error-message" *ngIf="passwordRef.invalid && passwordRef.touched">
+                        <small *ngIf="passwordRef.errors?.['required']">Password is required.</small>
+                        <small *ngIf="passwordRef.errors?.['minlength']">Password must be at least 8 characters.</small>
+                    </div>
                 </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
             </div>
         </form>
     </div>

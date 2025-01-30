@@ -26,7 +26,7 @@
             <h4>Services Included:</h4>
             <ul *ngIf="services.length > 0; else noServices">
                 <li *ngFor="let service of services">
-                    <strong>{{ service.serviceName }}</strong> - {{ service.serviceCost | currency:'INR':'symbol' }}
+                    <strong>{{ service.serviceName }}</strong>  {{ service.serviceCost | currency:'INR':'symbol' }}
                 </li>
             </ul>
 

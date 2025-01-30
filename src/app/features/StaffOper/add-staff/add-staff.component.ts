@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { AddStaff } from '../models/add-staff.model';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -7,40 +7,46 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-staff',
-  standalone:true,
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './add-staff.component.html',
   styleUrl: './add-staff.component.css'
 })
-export class AddStaffComponent implements OnDestroy{
+export class AddStaffComponent implements OnDestroy {
 
+  @Output() staffAdded = new EventEmitter<void>();
   model: AddStaff;
   private addStaffSubscription?: Subscription;
 
 
   constructor(private staffService: StaffService,
-    private router:Router
-  ){
+    private router: Router
+  ) {
     this.model = {
-      fullName:'',
-      email:'',
-      age:0,
-      sAddress:'',
-      salary:0,
-      designation:'',
+      fullName: '',
+      email: '',
+      age: 0,
+      sAddress: '',
+      salary: 0,
+      designation: '',
       joinDate: new Date(),
-      nIC:''
+      nIC: ''
     }
   }
 
 
-  onFormSubmit(){
-    this.addStaffSubscription  = this.staffService.addStaff(this.model)
-    .subscribe({
-      next:(response)=>{
-        this.router.navigateByUrl('/manager/staff');
-      }
-    })
+  onFormSubmit() {
+    this.addStaffSubscription = this.staffService.addStaff(this.model)
+      .subscribe({
+        next: (response) => {
+          alert("Staff added Successfully!");
+          this.staffAdded.emit();
+          this.router.navigateByUrl('/manager/staff');
+        },
+        error: (error) => {
+          alert('Guest add failed!');
+        }
+      })
   }
 
   ngOnDestroy(): void {

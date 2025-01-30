@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,10 +16,13 @@ import { UpdateRoom } from '../models/update-room.model';
 })
 export class UpdateRoomsComponent implements OnInit, OnDestroy {
 
-  id: number | null = null;
+  // id: number | null = null;
   paramsSubscription?: Subscription;
   updateRoomSubscription?: Subscription;
   room?: Room;
+
+  @Input() roomId: number | null = null;
+  @Output() closePopup = new EventEmitter<void>();
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -29,28 +32,25 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.paramsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        const idParam = params.get('id');
-        this.id = idParam ? parseInt(idParam, 10) : null;
+    if (this.roomId) {
 
-        if (this.id) {
-          this.roomService.getRoomById(this.id)
-            .subscribe({
-              next: (response) => {
-                this.room = response;
-              },
-              error: (err) => {
-                console.error('Failed to fetch room details:', err);
-                alert('Room not found.');
-              },
-            });
-        }
-      }
-    });
+      this.paramsSubscription = this.roomService.getRoomById(this.roomId)
+        .subscribe({
+          next: (response) => {
+            this.room = response;
+          },
+          error: (err) => {
+            console.error('Failed to fetch room details:', err);
+            alert('Room not found.');
+          },
+        });
+    }
   }
 
+
   onFormSubmit(): void {
+    if (!this.room) return;
+
     const updateRoom: UpdateRoom = {
       roomType: this.room?.roomType ?? '',
       description: this.room?.description ?? '',
@@ -60,11 +60,12 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
     }
 
 
-    if (this.id) {
-      this.updateRoomSubscription = this.roomService.updateRoom(this.id, updateRoom)
+    if (this.roomId) {
+      this.updateRoomSubscription = this.roomService.updateRoom(this.roomId, updateRoom)
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/manager/room')
+            alert("Room updated successfully!");
+            this.closePopup.emit();
           },
           error: (error) => {
             console.error('Update failed:', error);
@@ -75,13 +76,15 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    if (this.id) {
-      this.roomService.deleteRoom(this.id)
-      .subscribe({
-        next:(response)=>{
-          this.router.navigateByUrl('/manager/room')
-        }
-      });
+    if (this.roomId) {
+      this.roomService.deleteRoom(this.roomId)
+        .subscribe({
+          next: (response) => {
+            alert("Room deleted successfully")
+            this.closePopup.emit();
+            this.router.navigateByUrl('/manager/room')
+          }
+        });
     }
   }
 

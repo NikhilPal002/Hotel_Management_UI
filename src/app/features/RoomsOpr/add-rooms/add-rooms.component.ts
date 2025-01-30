@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddRoom } from '../models/add-room.model';
 import { RoomService } from '../services/room.service';
@@ -16,13 +16,13 @@ import { response } from 'express';
 })
 
 export class AddRoomsComponent implements OnDestroy {
-
+  @Output() roomAdded = new EventEmitter<void>();
   model: AddRoom;
 
   private addRoomSubscription?: Subscription;
 
   constructor(private roomService: RoomService,
-    private router:Router
+    private router: Router
   ) {
     this.model = {
       roomType: '',
@@ -32,15 +32,21 @@ export class AddRoomsComponent implements OnDestroy {
       status: ''
     };
   }
-  
+
 
   onFormSubmit() {
     this.addRoomSubscription = this.roomService.addRoom(this.model)
-    .subscribe({
-      next: (response)=>{
-        this.router.navigateByUrl('/manager/room');
-      },
-    })
+      .subscribe({
+        next: (response) => {
+          alert('Room added successfully!');
+          this.roomAdded.emit();
+          // this.router.navigateByUrl('/manager/room');
+        },
+
+        error: (error) => {
+          alert('Room add failed!');
+        }
+      })
   }
 
   ngOnDestroy(): void {

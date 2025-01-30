@@ -5,10 +5,11 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { response } from 'express';
 import {CookieService} from 'ngx-cookie-service'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule,CommonModule],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

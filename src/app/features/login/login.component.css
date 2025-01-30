@@ -1,81 +1,91 @@
-/* General styling for the login form */
-
-.container{
-    width: 100%;
-    max-width: 500px;
-    margin : 30px auto;
-    padding: 20px;
-    background-color:rgba(235, 236, 241, 0.694);
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+/* General Styles */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
 .login-heading {
     text-align: center;
-    font-size: 24px;
+    color: #1434A4;
+    font-size: 26px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-
+/* Login Form */
 .login-form {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for form fields */
-.login-field .form-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+.login-field {
+    display: flex;
+    flex-direction: column;
 }
 
-.login-field .form-control {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    transition: border-color 0.3s ease;
-}
-
-.login-field .form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-/* Styling for the button */
-.login-field .btn {
-    width: 100%;
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.login-field .btn:hover {
-    background-color: #0056b3;
-}
-
-/* Add some spacing between elements */
 .mb-3 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
+.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #25cbd7;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Button */
+.btn-primary {
+    background: linear-gradient(135deg, #25cbd7, #069ba5);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg,#e58900, #c27603dc );
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
