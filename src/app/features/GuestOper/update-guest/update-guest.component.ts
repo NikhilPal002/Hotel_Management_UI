@@ -6,6 +6,7 @@ import { Guest } from '../models/guest.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UpdateGuest } from '../models/update-guest.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-guest',
@@ -58,15 +59,33 @@ export class UpdateGuestComponent implements OnInit, OnDestroy {
       this.updateGuestSubscription = this.guestService.updateGuest(this.guestId, updateGuest)
         .subscribe({
           next: (response) => {
-            alert('Guest updated successfully!');
+            Swal.fire({
+              icon: 'success',
+              title: 'Guest Updated!',
+              text: 'Guest has been successfully updated.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
           },
-          error: (error) => {
-            console.error('Update failed:', error);
-            alert('Guest not found or update failed!');
+          error: (err) => {
+            const errors = this.extractErrorMessages(err);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Guest update Failed',
+              html: errors.join('<br>'),
+            });
           }
         })
     }
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   onDelete(): void {
@@ -74,9 +93,24 @@ export class UpdateGuestComponent implements OnInit, OnDestroy {
       this.guestService.deleteGuest(this.guestId)
         .subscribe({
           next: (response) => {
-            alert('Guest deleted successfully!');
+            Swal.fire({
+              icon: 'success',
+              title: 'Guest Deleted!',
+              text: 'Guest has been successfully deleted.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
             this.router.navigateByUrl('/receptionist/guest')
+          },
+          error: (err) => {
+            const errors = this.extractErrorMessages(err);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Guest delete Failed',
+              html: errors.join('<br>'),
+            });
           }
         });
     }

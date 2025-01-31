@@ -7,6 +7,7 @@ import { BillingService } from '../../BillingOper/services/billing.service';
 import { CommonModule } from '@angular/common';
 import { Billing } from '../../BillingOper/models/billing.model';
 import { Payment } from '../models/payment.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payment',
@@ -53,7 +54,13 @@ export class PaymentComponent implements OnInit, OnDestroy {
               this.payment.paymentAmount = this.billing.totalCost;
             },
             error: (error) => {
-              console.error('Error fetching billing details:', error);
+              const errors = this.extractErrorMessages(error);
+
+              Swal.fire({
+                icon: 'error',
+                title: 'Error fetching billing details:',
+                html: errors.join('<br>'),
+              });
             }
           });
       }
@@ -66,17 +73,32 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   makePayment(): void {
     if (this.payment.paymentAmount <= 0) {
-      console.error('Invalid payment amount');
+      Swal.fire({
+        icon: 'error',
+        text: 'Invalid payment amount',
+        timer: 2000,
+        showConfirmButton: false
+      });
       return;
     }
 
     if (!this.paymentMethod) {
-      console.error('Payment method is required.');
+      Swal.fire({
+        icon: 'error',
+        text: 'Payment method is required.',
+        timer: 2000,
+        showConfirmButton: false
+      });
       return;
     }
 
     if (this.billing?.paymentStatus === 'Paid') {
-      alert('Payment has already been processed.');
+      Swal.fire({
+        icon: 'error',
+        text: 'Payment has already been made.',
+        timer: 2000,
+        showConfirmButton: false
+      });
       return;
     }
 
@@ -85,17 +107,36 @@ export class PaymentComponent implements OnInit, OnDestroy {
       billingId: this.payment.billingId,
       paymentMethod: this.paymentMethod,
     };
-    
+
     this.paymentService.processPayment(paymentData).subscribe({
       next: (response) => {
-        alert("Payment processed succesfully")
-        this.router.navigate(['/receptionist/view-bill', this.billingId]);  
+        Swal.fire({
+          icon: 'success',
+          title: 'Payment Processed!',
+          text: 'Payment has been successfully Made.',
+          timer: 2000,
+          showConfirmButton: false
+        });
+        this.router.navigate(['/receptionist/view-bill', this.billingId]);
       },
       error: (error) => {
-        console.error('Error processing payment:', error);
+        const errors = this.extractErrorMessages(error);
+
+        Swal.fire({
+          icon: 'error',
+          title: 'payment Failed',
+          html: errors.join('<br>'),
+        });
       }
     });
 
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   ngOnDestroy(): void {

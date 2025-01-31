@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Room } from '../models/room.model';
 import { RoomService } from '../services/room.service';
 import { UpdateRoom } from '../models/update-room.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-rooms',
@@ -40,8 +41,13 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
             this.room = response;
           },
           error: (err) => {
-            console.error('Failed to fetch room details:', err);
-            alert('Room not found.');
+            const errors = this.extractErrorMessages(err);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Room Not Found',
+              html: errors.join('<br>'),
+            });
           },
         });
     }
@@ -64,15 +70,33 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
       this.updateRoomSubscription = this.roomService.updateRoom(this.roomId, updateRoom)
         .subscribe({
           next: (response) => {
-            alert("Room updated successfully!");
+            Swal.fire({
+              icon: 'success',
+              title: 'Room Updated!',
+              text: 'Room has been successfully updated.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
           },
           error: (error) => {
-            console.error('Update failed:', error);
-            alert('Guest not found or update failed!');
+            const errors = this.extractErrorMessages(error);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Room Update Failed',
+              html: errors.join('<br>'),
+            });
           }
         })
     }
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   onDelete(): void {
@@ -80,9 +104,24 @@ export class UpdateRoomsComponent implements OnInit, OnDestroy {
       this.roomService.deleteRoom(this.roomId)
         .subscribe({
           next: (response) => {
-            alert("Room deleted successfully")
+            Swal.fire({
+              icon: 'success',
+              title: 'Room Deleted!',
+              text: 'Room has been successfully deleted.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
             this.router.navigateByUrl('/manager/room')
+          },
+          error: (err) => {
+            const errors = this.extractErrorMessages(err);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Room Delete Failed',
+              html: errors.join('<br>'),
+            });
           }
         });
     }

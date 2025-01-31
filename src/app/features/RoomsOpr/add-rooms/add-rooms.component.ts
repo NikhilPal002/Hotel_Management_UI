@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { nextTick } from 'process';
 import { response } from 'express';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-rooms',
@@ -38,15 +39,34 @@ export class AddRoomsComponent implements OnDestroy {
     this.addRoomSubscription = this.roomService.addRoom(this.model)
       .subscribe({
         next: (response) => {
-          alert('Room added successfully!');
+          Swal.fire({
+            icon: 'success',
+            title: 'Room Added!',
+            text: 'Room has been successfully added.',
+            timer: 2000,
+            showConfirmButton: false
+          });
           this.roomAdded.emit();
           // this.router.navigateByUrl('/manager/room');
         },
 
-        error: (error) => {
-          alert('Room add failed!');
+        error: (err) => {
+          const errors = this.extractErrorMessages(err);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Room Add Failed',
+            html: errors.join('<br>'),
+          });
         }
       })
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   ngOnDestroy(): void {

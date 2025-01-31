@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background: linear-gradient(to right, #25cbd7, #4d8ed9); /* Change this to any color you like */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Change this to any color you like */
+}

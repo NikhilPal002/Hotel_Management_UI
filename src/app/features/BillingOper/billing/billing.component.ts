@@ -4,6 +4,7 @@ import { Service } from '../models/service.model';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-billing',
@@ -60,14 +61,33 @@ export class BillingComponent implements OnInit {
     this.billingService.generateBill(this.billingData, this.selectedServiceIds)
       .subscribe({
         next: () => {
-          alert("Bill Generated");
+          Swal.fire({
+            icon: 'success',
+            title: 'Bill Generated!',
+            text: 'Bill has been successfully Generated.',
+            timer: 2000,
+            showConfirmButton: false
+          });
           this.billAdded.emit();
           this.router.navigateByUrl('receptionist/billinglist')
         },
         error: (error) => {
-          this.errorMessage = 'Error generating bill.';
+          const errors = this.extractErrorMessages(error);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Bill Generation Failed',
+            html: errors.join('<br>'),
+          });
         }
 
       })
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 }

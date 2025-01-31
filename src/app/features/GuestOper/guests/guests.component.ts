@@ -1,10 +1,10 @@
-import { Component,EventEmitter,Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddGuest } from '../models/add-guest.model';
 import { GuestService } from '../services/guest.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-guests',
@@ -19,8 +19,7 @@ export class GuestsComponent implements OnDestroy {
 
   private addGuestSubscription?: Subscription;
 
-  constructor(private guestService : GuestService,
-    private router: Router) {
+  constructor(private guestService: GuestService, private router: Router) {
     this.model = {
       guestName: '',
       gender: '',
@@ -30,23 +29,42 @@ export class GuestsComponent implements OnDestroy {
       pinCode: ''
     };
   }
-  
 
   onFormSubmit() {
     this.addGuestSubscription = this.guestService.addGuest(this.model)
-    .subscribe({
-      next: (response)=>{
-        alert('Guest added successfully!');
-        this.guestAdded.emit();
-        this.router.navigateByUrl('/receptionist/guest');
-      },
-      error: (error) => {
-        alert('Guest add failed!');
-      }
-    })
+      .subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Guest Added!',
+            text: 'Guest has been successfully added.',
+            timer: 2000,
+            showConfirmButton: false
+          });
+          this.guestAdded.emit();
+          this.router.navigateByUrl('/receptionist/guest');
+        },
+        error: (err) => {
+          const errors = this.extractErrorMessages(err);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Guest Add Failed',
+            html: errors.join('<br>'),
+          });
+        }
+      });
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   ngOnDestroy(): void {
     this.addGuestSubscription?.unsubscribe();
   }
 }
+

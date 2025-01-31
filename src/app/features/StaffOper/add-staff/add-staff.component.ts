@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { StaffService } from '../services/staff.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-staff',
@@ -39,14 +40,33 @@ export class AddStaffComponent implements OnDestroy {
     this.addStaffSubscription = this.staffService.addStaff(this.model)
       .subscribe({
         next: (response) => {
-          alert("Staff added Successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Staff Added!',
+            text: 'Staff has been successfully added.',
+            timer: 2000,
+            showConfirmButton: false
+          });
           this.staffAdded.emit();
           this.router.navigateByUrl('/manager/staff');
         },
         error: (error) => {
-          alert('Guest add failed!');
+          const errors = this.extractErrorMessages(error);
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Staff Add Failed',
+            html: errors.join('<br>'),
+          });
         }
       })
+  }
+
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
   }
 
   ngOnDestroy(): void {

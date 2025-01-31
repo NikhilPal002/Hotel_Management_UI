@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
@@ -11,9 +11,10 @@ body {
   max-width: 900px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Heading Styles */
@@ -66,7 +67,7 @@ button[type="submit"] {
   flex-basis: 100%;
   /* Button takes the full row */
   max-width: 100%;
-  background-color: #25cbd7;
+  background: linear-gradient(135deg, #25cbd7, #069ba5);
   color: #fff;
   padding: 10px 15px;
   font-size: 1rem;
@@ -78,13 +79,15 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #e58900;
+  background: linear-gradient(135deg, #e58900, #c27603dc);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 /* Table Styles */
 .table {
   width: 100%;
   border-collapse: collapse;
+  background-color: #fff;
   margin-top: 20px;
 }
 
@@ -93,20 +96,13 @@ button[type="submit"]:hover {
   padding: 12px 15px;
   text-align: center;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 .table th {
   background-color: #25cbd7;
   color: #fff;
   font-weight: bold;
-}
-
-.table-striped tbody tr:nth-child(odd) {
-  background-color: #f9f9f9;
-}
-
-.table-striped tbody tr:hover {
-  background-color: #e9f2ff;
 }
 
 .btn {
@@ -160,12 +156,12 @@ button[type="submit"]:hover {
 }
 
 .pagination li a:hover {
-  background-color: #e58900;
+  background: linear-gradient(135deg, #e58900, #c27603dc);
   color: #fff;
 }
 
 .pagination li.active a {
-  background-color: #25cbd7;
+  background: linear-gradient(135deg, #25cbd7, #069ba5);
   color: #fff;
   font-weight: bold;
   pointer-events: none;

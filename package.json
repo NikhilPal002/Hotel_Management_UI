@@ -11,7 +11,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.0.0",
     "@angular/common": "^19.0.0",
     "@angular/compiler": "^19.0.0",
     "@angular/core": "^19.0.0",
@@ -26,6 +25,7 @@
     "jwt-decode": "^4.0.0",
     "ngx-cookie-service": "^19.0.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.15.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

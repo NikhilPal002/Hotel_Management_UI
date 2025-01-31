@@ -6,6 +6,7 @@ import { Inventory } from '../models/list-inventory.model';
 import { Subscription } from 'rxjs';
 import { InventoryService } from '../services/inventory.service';
 import { UpdateInventory } from '../models/update-inventory.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-inventory',
@@ -55,7 +56,12 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
   onFormSubmit(): void {
 
     if (!this.inventory) {
-      alert('No inventory data to update.');
+      Swal.fire({
+        icon: 'error',
+        text: 'No inventory data to update',
+        timer: 2000,
+        showConfirmButton: false
+      });
       return;
     }
 
@@ -71,17 +77,34 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
       this.updateInventorySubscription = this.inventoryService.updateInventory(this.inventoryId, updateInventory)
         .subscribe({
           next: (response) => {
-            alert('Inventory updated successfully.');
+            Swal.fire({
+              icon: 'success',
+              title: 'Inventory Updated!',
+              text: 'Item has been successfully updated.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
           },
           error: (error) => {
-            console.error('Update failed:', error);
-            alert('Inventory not found or update failed!');
+            const errors = this.extractErrorMessages(error);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Inventory Update Failed',
+              html: errors.join('<br>'),
+            });
           }
         })
     }
   }
 
+  private extractErrorMessages(err: any): string[] {
+    if (typeof err.error === 'string') return [err.error]; // Handle plain string error
+    if (Array.isArray(err.error?.message)) return (err.error.message as string[]);
+    if (err.error?.message) return [err.error.message as string];
+    return Object.values(err.error?.errors || {}).flat() as string[] || ['An unexpected error occurred.'];
+  }
 
 
   onDelete(): void {
@@ -89,9 +112,24 @@ export class UpdateInventoryComponent implements OnInit, OnDestroy {
       this.inventoryService.deleteInventory(this.inventoryId)
         .subscribe({
           next: (response) => {
-            alert('Inventory deleted successfully.');
+            Swal.fire({
+              icon: 'success',
+              title: 'Inventory Deleted!',
+              text: 'Item has been successfully deleted.',
+              timer: 2000,
+              showConfirmButton: false
+            });
             this.closePopup.emit();
             this.router.navigateByUrl('/manager/inventory');
+          },
+          error: (err) => {
+            const errors = this.extractErrorMessages(err);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Item Delete Failed',
+              html: errors.join('<br>'),
+            });
           }
         });
     }
