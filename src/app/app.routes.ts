@@ -22,6 +22,7 @@ import { SearchRoomComponent } from './features/SearchRoom/search-room/search-ro
 import { BillingComponent } from './features/BillingOper/billing/billing.component';
 import { BillListComponent } from './features/BillingOper/bill-list/bill-list.component';
 import { ViewBillComponent } from './features/BillingOper/view-bill/view-bill.component';
+import { PaymentDetailComponent } from './features/PaymentOper/payment-detail/payment-detail.component';
 
 
 export const routes: Routes = [
@@ -33,99 +34,104 @@ export const routes: Routes = [
     {
         path: 'receptionist/guest',
         component: GuestListComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/guest/add',
         component: GuestsComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/guest/update/:id',
         component: UpdateGuestComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/room',
         component: ListRoomsComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/room/add',
         component: AddRoomsComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/room/update/:id',
         component: UpdateRoomsComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/inventory/add',
         component: AddInventoryComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/inventory',
         component: ListInventoryComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/inventory/update/:id',
         component: UpdateInventoryComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/staff',
         component: ListStaffComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/staff/add',
         component: AddStaffComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'manager/staff/update/:id',
         component: UpdateStaffComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
 
     {
         path: 'receptionist/booking/add',
         component: CreateBookingComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/booking',
         component: ListBookingComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/payment/:billingId',
         component: PaymentComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
+    },
+    {
+        path: 'receptionist/payment-details/:billingId',
+        component: PaymentDetailComponent,
+        canActivate: [authGuard]
     },
 
     {
         path: 'receptionist/search',
         component: SearchRoomComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/billing',
         component: BillingComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/billinglist',
         component: BillListComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'receptionist/view-bill/:billingId',
         component: ViewBillComponent,
-        canActivate:[authGuard]
+        canActivate: [authGuard]
     },
-    
+
 ];

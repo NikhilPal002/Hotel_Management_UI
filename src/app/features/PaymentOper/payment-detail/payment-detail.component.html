@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 class="text-center">Payment Details</h2>
+
+    <div *ngIf="paymentDetails; else errorTemplate">
+        <div class="payment-header">
+            <h3>Payment Information</h3>
+            <p><strong>Billing ID:</strong> {{ paymentDetails.billing?.id }}</p>
+            <p><strong>Bill No:</strong> {{ paymentDetails.billing?.billingNo }}</p>
+            <p><strong>Payment ID:</strong> {{ paymentDetails.paymentId }}</p>
+            <p><strong>Transaction ID:</strong> {{ paymentDetails.transactionId }}</p>
+        </div>
+
+        <div class="payment-body">
+            <p><strong>Payment Method:</strong> {{ paymentDetails.paymentMethod }}</p>
+            <p><strong>Payment Date:</strong> {{ paymentDetails.paymentDate | date:'short' }}</p>
+            <p><strong>Amount Paid:</strong> {{ paymentDetails.paymentAmount| currency:'INR':'symbol' }}</p>
+        </div>
+    </div>
+
+    <ng-template #errorTemplate>
+        <p class="error-message">{{ errorMessage }}</p>
+    </ng-template>
+</div>

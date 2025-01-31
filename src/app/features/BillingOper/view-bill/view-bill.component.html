@@ -2,8 +2,8 @@
     <h2 class="text-center">Bill Details</h2>
     <div class="bill-template">
         <div class="bill-header">
-            <h3>Hotel Management System</h3>
-            <p>Billing ID: {{ bills.billingId }}</p>
+            <h3>Hotel StaySphere</h3>
+            <p>Billing ID: {{ bills.id }}</p>
             <p>Reservation ID: {{ bills.bookingId }}</p>
         </div>
 
@@ -11,10 +11,6 @@
             <h4>Guest Details:</h4>
             <p><strong>Guest Name:</strong> {{ bills.guestName }}</p>
             <p><strong>Room Number:</strong> {{ bills.roomNumber }}</p>
-            <!-- <p><strong>Room Type:</strong> {{ bills.roomType }}</p>
-            <p><strong>Check-In Date:</strong> {{ bills.checkInDate | date:'shortDate' }}</p>
-            <p><strong>Check-Out Date:</strong> {{ bills.checkOutDate | date:'shortDate' }}</p>
-            <p><strong>No. of Guests:</strong> {{ bills.noOfGuests }}</p> -->
 
             <h4>Cost Breakdown:</h4>
             <p><strong>Room Cost:</strong> {{ bills.roomCost | currency:'INR':'symbol' }}</p>
@@ -39,6 +35,10 @@
 
         <div class="payment-btn" *ngIf="bills.paymentStatus === 'Pending'">
             <button (click)="proceedToPayment()">Proceed to Payment</button>
+        </div>
+
+        <div class="payment-btn" *ngIf="bills.paymentStatus === 'Paid'">
+            <button (click)="viewPaymentDetail()">View Payment Detail</button>
         </div>
     </div>
 </div>

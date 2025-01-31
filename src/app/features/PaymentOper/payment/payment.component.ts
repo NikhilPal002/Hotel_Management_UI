@@ -50,7 +50,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
           .subscribe({
             next: (response) => {
               this.billing = response;
-              this.payment.billingId = this.billing.billingId
+              this.payment.billingId = this.billing.id
               this.payment.paymentAmount = this.billing.totalCost;
             },
             error: (error) => {

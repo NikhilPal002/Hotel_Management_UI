@@ -2,7 +2,7 @@ import { Booking } from "../../BookingOper/models/list-booking.model"
 import { Service } from "./service.model"
 
 export interface Billing{
-    billingId:number,
+    id:number,
     billingNo : string,
     bookingId:number,
     guestName:string,

@@ -1,0 +1,100 @@
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 30px auto 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Title */
+h2.text-center {
+  text-align: center;
+  color: #1434A4;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Payment Header */
+.payment-header {
+  background-color: #25cbd7;
+  color: rgb(252, 252, 252);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+}
+
+.payment-header h3 {
+  font-size: 26px;
+  margin-bottom: 12px;
+  color: rgb(83, 81, 81);
+}
+
+.payment-header p {
+  font-size: 18px;
+  margin: 6px 0;
+}
+
+/* Payment Body */
+.payment-body {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-body p {
+  font-size: 18px;
+  margin: 10px 0;
+  line-height: 1.7;
+}
+
+.payment-body strong {
+  font-weight: 700;
+  color: #333;
+}
+
+/* Error Template */
+.error-message {
+  font-size: 18px;
+  color: #ff4d4d;
+  text-align: center;
+  padding: 20px;
+  background-color: #fff0f0;
+  border: 1px solid #ff4d4d;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  h2.text-center {
+    font-size: 28px;
+  }
+
+  .payment-header h3 {
+    font-size: 22px;
+  }
+
+  .payment-body p {
+    font-size: 16px;
+  }
+
+  .error-message {
+    font-size: 16px;
+  }
+}

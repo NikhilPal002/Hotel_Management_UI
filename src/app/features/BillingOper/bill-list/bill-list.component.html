@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let billing of paginatedBills">
-                        <td>{{ billing.billingId }}</td>
+                        <td>{{ billing.id }}</td>
                         <td>{{ billing.billingNo }}</td>
                         <td>{{ billing.bookingId}}</td>
                         <td>{{ billing.guestName}}</td>
@@ -32,7 +32,7 @@
                         <td>{{ billing.totalCost | currency:'INR':'symbol' }}</td>
                         <td>{{ billing.paymentStatus }}</td>
                         <td>
-                            <button class="btn btn-danger" (click)="viewBill(billing.billingId)">
+                            <button class="btn btn-danger" (click)="viewBill(billing.id)">
                                 View Bill
                             </button>
                         </td>

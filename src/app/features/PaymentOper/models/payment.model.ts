@@ -6,6 +6,14 @@ export interface Payment{
     paymentDate:Date,
     paymentMethod:string,
     transactionId:string,
-    billingId:number
-    // billingId:number
+    billingId:number;
+}
+
+export interface PaymentDetails{
+    paymentId?:number,
+    paymentAmount:number,
+    paymentDate:Date,
+    paymentMethod:string,
+    transactionId:string,
+    billing?:Billing;
 }

@@ -19,4 +19,8 @@ export class PaymentService {
     return this.http.get<Payment[]>(`${environment.apiBaseUrl}/api/Payment`);
   }
 
+  getPaymentByBillingId(billingId: number): Observable<Payment> {
+    return this.http.get<Payment>(`${environment.apiBaseUrl}/api/Payment/billing/${billingId}`);
+  }
+
 }

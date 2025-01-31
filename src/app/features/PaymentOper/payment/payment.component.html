@@ -5,7 +5,7 @@
     <div class="card">
       <div *ngIf="billing">
         <h4>Bill Details:</h4>
-        <p><strong>Billing ID:</strong> {{ billing.billingId }}</p>
+        <p><strong>Billing ID:</strong> {{ billing.id }}</p>
         <p><strong>Total Cost:</strong> {{ billing.totalCost | currency: 'INR': 'symbol' }}</p>
         
       <form #Form="ngForm" (ngSubmit)="makePayment()">

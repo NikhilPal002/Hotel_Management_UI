@@ -55,6 +55,10 @@ export class ViewBillComponent implements OnInit, OnDestroy {
     }
   }
 
+  viewPaymentDetail(): void {
+    this.router.navigate(['/receptionist/payment-details/', this.bills?.id]);
+  }
+
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
     this.billingSubscription?.unsubscribe();
