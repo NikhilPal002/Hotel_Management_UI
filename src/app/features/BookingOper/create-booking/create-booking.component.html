@@ -1,49 +1,75 @@
 <div class="container">
     <h3 class="room-heading">Booking Details</h3>
-    <form #Form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form #Form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
         <div class="form-data">
+            <!-- Number Of Adults -->
             <div class="mb-3">
                 <label class="form-label">Number Of Adults</label>
-                <input type="number" class="form-control" id="numberOfAdults" name="numberOfAdults"
-                    placeholder="0" [(ngModel)]="model.numberOfAdults">
+                <input type="number" class="form-control" id="numberOfAdults" name="numberOfAdults" placeholder="0"
+                    [(ngModel)]="model.numberOfAdults" required min="1" #numberOfAdults="ngModel">
+                <div *ngIf="numberOfAdults.invalid && numberOfAdults.touched" class="text-danger">
+                    <small *ngIf="numberOfAdults.errors?.['required']">Number of adults is required.</small>
+                    <small *ngIf="numberOfAdults.errors?.['min']">At least one adult is required.</small>
+                </div>
             </div>
 
+            <!-- Number Of Children -->
             <div class="mb-3">
                 <label class="form-label">Number Of Children</label>
-                <input type="number" class="form-control" id="numberOfChildren" name="numberOfChildren"
-                    placeholder="0" [(ngModel)]="model.numberOfChildren" >
+                <input type="number" class="form-control" id="numberOfChildren" name="numberOfChildren" placeholder="0"
+                    [(ngModel)]="model.numberOfChildren" required min="0" #numberOfChildren="ngModel">
+                <div *ngIf="numberOfChildren.invalid && numberOfChildren.touched" class="text-danger">
+                    <small *ngIf="numberOfChildren.errors?.['required']">This field is required.</small>
+                    <small *ngIf="numberOfChildren.errors?.['min']">Number of children cannot be negative.</small>
+                </div>
             </div>
 
+            <!-- Check-In DateTime -->
             <div class="mb-3">
-                <label class="form-label">CheckIn DateTime</label>
+                <label class="form-label">Check-In DateTime</label>
                 <input type="datetime-local" class="form-control" id="checkIn" name="checkIn"
-                    placeholder="0" [(ngModel)]="model.checkIn" >
+                    [(ngModel)]="model.checkIn" required #checkIn="ngModel">
+                <div *ngIf="checkIn.invalid && checkIn.touched" class="text-danger">
+                    <small *ngIf="checkIn.errors?.['required']">Check-in date and time is required.</small>
+                </div>
             </div>
 
+            <!-- Check-Out DateTime -->
             <div class="mb-3">
-                <label class="form-label">checkOut DateTime</label>
+                <label class="form-label">Check-Out DateTime</label>
                 <input type="datetime-local" class="form-control" id="checkOut" name="checkOut"
-                    placeholder="street" [(ngModel)]="model.checkOut" >
+                    [(ngModel)]="model.checkOut" required #checkOut="ngModel">
+                <div *ngIf="checkOut.invalid && checkOut.touched" class="text-danger">
+                    <small *ngIf="checkOut.errors?.['required']">Check-out date and time is required.</small>
+                </div>
             </div>
 
+            <!-- Guest ID -->
             <div class="mb-3">
-                <label class="form-label">Guest Id</label>
-                <input type="number" class="form-control" id="guestId" name="guestId"
-                    placeholder="" [(ngModel)]="model.guestId" >
+                <label class="form-label">Guest ID</label>
+                <input type="number" class="form-control" id="guestId" name="guestId" [(ngModel)]="model.guestId"
+                    required min="1" #guestId="ngModel">
+                <div *ngIf="guestId.invalid && guestId.touched" class="text-danger">
+                    <small *ngIf="guestId.errors?.['required']">Guest ID is required.</small>
+                    <small *ngIf="guestId.errors?.['min']">Guest ID must be a positive number.</small>
+                </div>
             </div>
 
+            <!-- Room Number -->
             <div class="mb-3">
                 <label class="form-label">Room No.</label>
-                <input type="number" class="form-control" id="roomId" name="roomId"
-                    placeholder="" [(ngModel)]="model.roomId" >
+                <input type="number" class="form-control" id="roomId" name="roomId" [(ngModel)]="model.roomId" required
+                    min="1" #roomId="ngModel">
+                <div *ngIf="roomId.invalid && roomId.touched" class="text-danger">
+                    <small *ngIf="roomId.errors?.['required']">Room number is required.</small>
+                    <small *ngIf="roomId.errors?.['min']">Room number must be a positive number.</small>
+                </div>
             </div>
 
-
+            <!-- Submit Button -->
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Add Booking</button>
+                <button class="btn btn-primary" type="submit" [disabled]="Form.invalid">Add Booking</button>
             </div>
-
         </div>
     </form>
-
 </div>

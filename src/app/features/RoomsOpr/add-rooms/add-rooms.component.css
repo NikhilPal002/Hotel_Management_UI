@@ -109,3 +109,20 @@
     /* Remove focus outline */
     box-shadow: 0 0 5px #e58900;
 }
+
+.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}

@@ -28,7 +28,7 @@
                     <td>{{staff.email}}</td>
                     <td>{{staff.age}}</td>
                     <td>{{staff.sAddress}}</td>
-                    <td>${{staff.salary}}</td>
+                    <td>${{staff.salary | currency:'INR':'symbol'}}</td>
                     <td>{{staff.designation}}</td>
                     <td>{{staff.joinDate | date:'yyyy-MM-dd'}}</td>
                     <td>{{staff.nic}}</td>

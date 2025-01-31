@@ -1,45 +1,64 @@
 <div class="container">
     <h3 class="room-heading">Room Details</h3>
-    <form #Form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form #Form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
         <div class="form-data">
+            <!-- Room Type -->
             <div class="mb-3">
                 <label class="form-label">Room Type</label>
-                <input type="text" class="form-control" id="roomType" name="roomType"
-                    placeholder="Room Type" [(ngModel)]="model.roomType">
+                <input type="text" class="form-control" id="roomType" name="roomType" placeholder="Room Type"
+                    [(ngModel)]="model.roomType" required #roomType="ngModel">
+                <div *ngIf="roomType.invalid && roomType.touched" class="text-danger">
+                    <small *ngIf="roomType.errors?.['required']">Room Type is required.</small>
+                </div>
             </div>
 
+            <!-- Description -->
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea type="text" class="form-control" id="description" name="description"
-                    placeholder="Description about the room" [(ngModel)]="model.description" ></textarea>
+                <textarea class="form-control" id="description" name="description"
+                    placeholder="Description about the room" [(ngModel)]="model.description"></textarea>
             </div>
 
+            <!-- Number Of Beds -->
             <div class="mb-3">
                 <label class="form-label">Number Of Beds</label>
-                <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds"
-                    placeholder="0" [(ngModel)]="model.numberOfBeds" >
+                <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds" placeholder="0"
+                    [(ngModel)]="model.numberOfBeds" required min="1" #numberOfBeds="ngModel">
+                <div *ngIf="numberOfBeds.invalid && numberOfBeds.touched" class="text-danger">
+                    <small *ngIf="numberOfBeds.errors?.['required']">Number of Beds is required.</small>
+                    <small *ngIf="numberOfBeds.errors?.['min']">Must be at least 1 bed.</small>
+                </div>
             </div>
 
+            <!-- Price Per Night -->
             <div class="mb-3">
                 <label class="form-label">Price Per Night</label>
-                <input type="number" class="form-control" id="pricePerNight" name="pricePerNight"
-                    placeholder="$500" [(ngModel)]="model.pricePerNight" >
+                <input type="number" class="form-control" id="pricePerNight" name="pricePerNight" placeholder="$500"
+                    [(ngModel)]="model.pricePerNight" required min="1" #pricePerNight="ngModel">
+                <div *ngIf="pricePerNight.invalid && pricePerNight.touched" class="text-danger">
+                    <small *ngIf="pricePerNight.errors?.['required']">Price is required.</small>
+                    <small *ngIf="pricePerNight.errors?.['min']">Price must be at greater than 0.</small>
+                </div>
             </div>
 
+            <!-- Room Status -->
             <div class="mb-3">
-                <label class="input-label">Room Status</label>
-                <select class="form-select" id="status"  name="status" [(ngModel)]="model.status" >
-                    <option selected>Choose...</option>
+                <label class="form-label">Room Status</label>
+                <select class="form-select" id="status" name="status" [(ngModel)]="model.status" required
+                    #status="ngModel">
+                    <option value="" disabled selected>Choose...</option>
                     <option value="Available">Available</option>
                     <option value="Occupied">Occupied</option>
                 </select>
+                <div *ngIf="status.invalid && status.touched" class="text-danger">
+                    <small *ngIf="status.errors?.['required']">Room Status is required.</small>
+                </div>
             </div>
 
+            <!-- Submit Button -->
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Add Room</button>
+                <button class="btn btn-primary" type="submit" [disabled]="Form.invalid">Add Room</button>
             </div>
-
         </div>
     </form>
-
 </div>

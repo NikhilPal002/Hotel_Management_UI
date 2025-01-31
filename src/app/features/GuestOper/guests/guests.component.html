@@ -1,50 +1,72 @@
 <div class="container">
     <h3 class="guest-heading">Guest Details</h3>
-    <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form #form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
         <div class="form-data">
             <div class="mb-3">
                 <label class="form-label">Guest Name</label>
-                <input type="name" class="form-control" id="guestName" name="guestName"
-                    placeholder="Name" [(ngModel)]="model.guestName" >
+                <input type="text" class="form-control" id="guestName" name="guestName" placeholder="Name"
+                    [(ngModel)]="model.guestName" required #guestName="ngModel">
+                <div *ngIf="guestName.invalid && guestName.touched" class="text-danger">
+                    <small *ngIf="guestName.errors?.['required']">Guest name is required.</small>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    placeholder="email@example.com" [(ngModel)]="model.email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com"
+                    [(ngModel)]="model.email" required email #email="ngModel">
+                <div *ngIf="email.invalid && email.touched" class="text-danger">
+                    <small *ngIf="email.errors?.['required']">Email is required.</small>
+                    <small *ngIf="email.errors?.['email']">Enter a valid email address.</small>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Gender</label>
-                <select class="form-select" id="gender" [(ngModel)]="model.gender" name="gender">
-                    <option selected>Choose...</option>
+                <select class="form-select" id="gender" [(ngModel)]="model.gender" name="gender" required
+                    #gender="ngModel">
+                    <option value="" disabled selected>Choose...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Others">Others</option>
                 </select>
+                <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+                    <small *ngIf="gender.errors?.['required']">Gender selection is required.</small>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phone" name="phoneNumber"
-                    placeholder="123456789" [(ngModel)]="model.phoneNumber">
+                <input type="text" class="form-control" id="phone" name="phoneNumber" placeholder="123456789"
+                    [(ngModel)]="model.phoneNumber" required pattern="^[0-9]{10}$" #phone="ngModel">
+                <div *ngIf="phone.invalid && phone.touched" class="text-danger">
+                    <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+                    <small *ngIf="phone.errors?.['pattern']">Phone number must be 10 digits.</small>
+                </div>
             </div>
 
             <div class="col-md-6">
                 <label class="form-label">State</label>
-                <input type="text" class="form-control" id="inputCity"  name="inputCity" [(ngModel)]="model.state">
+                <input type="text" class="form-control" id="inputCity" name="inputCity" [(ngModel)]="model.state"
+                    required #state="ngModel">
+                <div *ngIf="state.invalid && state.touched" class="text-danger">
+                    <small *ngIf="state.errors?.['required']">State is required.</small>
+                </div>
             </div>
 
             <div class="col-md-2">
                 <label class="form-label">PinCode</label>
-                <input type="text" class="form-control" id="inputZip" name="inputZip" [(ngModel)]="model.pinCode">
+                <input type="text" class="form-control" id="inputZip" name="inputZip" [(ngModel)]="model.pinCode"
+                    required pattern="^[0-9]{6}$" #pinCode="ngModel">
+                <div *ngIf="pinCode.invalid && pinCode.touched" class="text-danger">
+                    <small *ngIf="pinCode.errors?.['required']">PinCode is required.</small>
+                    <small *ngIf="pinCode.errors?.['pattern']">PinCode must be exactly 6 digits.</small>
+                </div>
             </div>
 
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Add Guest</button>
+                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Add Guest</button>
             </div>
-
         </div>
     </form>
-
 </div>

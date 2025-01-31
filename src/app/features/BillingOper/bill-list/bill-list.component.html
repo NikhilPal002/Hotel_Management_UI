@@ -27,9 +27,9 @@
                         <td>{{ billing.billingNo }}</td>
                         <td>{{ billing.bookingId}}</td>
                         <td>{{ billing.guestName}}</td>
-                        <td>{{ billing.roomCost| currency }}</td>
-                        <td>{{ billing.taxes | currency }}</td>
-                        <td>{{ billing.totalCost | currency }}</td>
+                        <td>{{ billing.roomCost| currency:'INR':'symbol' }}</td>
+                        <td>{{ billing.taxes | currency:'INR':'symbol' }}</td>
+                        <td>{{ billing.totalCost | currency:'INR':'symbol' }}</td>
                         <td>{{ billing.paymentStatus }}</td>
                         <td>
                             <button class="btn btn-danger" (click)="viewBill(billing.billingId)">

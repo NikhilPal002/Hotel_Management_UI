@@ -1,64 +1,82 @@
 <div class="container">
     <h3 class="room-heading">Edit Room</h3>
-    <ng-container *ngIf ="room;else notFound"  >
-        <form #Form="ngForm" (ngSubmit)="onFormSubmit()">
+    <ng-container *ngIf="room; else notFound">
+        <form #Form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
             <div class="form-data">
+                <!-- Room ID (Disabled) -->
                 <div class="mb-3">
                     <label class="form-label">Room Id</label>
                     <input type="text" disabled class="form-control" id="roomId" name="roomId"
-                         [(ngModel)]="room.roomId">
+                        [(ngModel)]="room.roomId">
                 </div>
-    
+
+                <!-- Room Type -->
                 <div class="mb-3">
                     <label class="form-label">Room Type</label>
-                    <input type="text" class="form-control" id="roomType" name="roomType"
-                         [(ngModel)]="room.roomType">
+                    <input type="text" class="form-control" id="roomType" name="roomType" [(ngModel)]="room.roomType"
+                        required #roomType="ngModel">
+                    <div *ngIf="roomType.invalid && roomType.touched" class="text-danger">
+                        <small *ngIf="roomType.errors?.['required']">Room Type is required.</small>
+                    </div>
                 </div>
-    
+
+                <!-- Description -->
                 <div class="mb-3">
                     <label class="form-label">Description</label>
                     <textarea class="form-control" id="description" name="description"
-                         [(ngModel)]="room.description" ></textarea>
+                        [(ngModel)]="room.description"></textarea>
+
                 </div>
-    
+
+                <!-- Number Of Beds -->
                 <div class="mb-3">
                     <label class="form-label">Number Of Beds</label>
                     <input type="number" class="form-control" id="numberOfBeds" name="numberOfBeds"
-                         [(ngModel)]="room.numberOfBeds" >
+                        [(ngModel)]="room.numberOfBeds" required min="1" #numberOfBeds="ngModel">
+                    <div *ngIf="numberOfBeds.invalid && numberOfBeds.touched" class="text-danger">
+                        <small *ngIf="numberOfBeds.errors?.['required']">Number of Beds is required.</small>
+                        <small *ngIf="numberOfBeds.errors?.['min']">Must be at least 1 bed.</small>
+                    </div>
                 </div>
-    
+
+                <!-- Price Per Night -->
                 <div class="mb-3">
                     <label class="form-label">Price Per Night</label>
                     <input type="number" class="form-control" id="pricePerNight" name="pricePerNight"
-                         [(ngModel)]="room.pricePerNight" >
+                        [(ngModel)]="room.pricePerNight" required min="1" #pricePerNight="ngModel">
+                    <div *ngIf="pricePerNight.invalid && pricePerNight.touched" class="text-danger">
+                        <small *ngIf="pricePerNight.errors?.['required']">Price is required.</small>
+                        <small *ngIf="pricePerNight.errors?.['min']">Price must be at greater than 0.</small>
+                    </div>
                 </div>
-    
+
+                <!-- Room Status -->
                 <div class="mb-3">
-                    <label class="input-label">Room Status</label>
-                    <select class="form-select" id="status"  name="status" [(ngModel)]="room.status" >
-                        <option selected>{{room.status}}</option>
+                    <label class="form-label">Room Status</label>
+                    <select class="form-select" id="status" name="status" [(ngModel)]="room.status" required
+                        #status="ngModel">
+                        <option value="" disabled selected>Choose...</option>
                         <option value="Available">Available</option>
                         <option value="Occupied">Occupied</option>
-                        <option value="Occupied">Under Maintenance</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
                     </select>
+                    <div *ngIf="status.invalid && status.touched" class="text-danger">
+                        <small *ngIf="status.errors?.['required']">Room Status is required.</small>
+                    </div>
                 </div>
-    
+
+                <!-- Submit & Delete Buttons -->
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Update Room</button>
-                    <button class="btn btn-danger mt-3" type="button"
-                    (click)="onDelete()"
-                    >Delete</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="Form.invalid">Update Room</button>
+                    <button class="btn btn-danger mt-3" type="button" (click)="onDelete()">Delete</button>
                 </div>
-    
             </div>
         </form>
-
     </ng-container>
 
     <ng-template #notFound>
-        <div class="alert alert-warning" role="alert" >
-           Guest not found!
+        <div class="alert alert-warning" role="alert">
+            Room not found!
         </div>
-
     </ng-template>
 </div>

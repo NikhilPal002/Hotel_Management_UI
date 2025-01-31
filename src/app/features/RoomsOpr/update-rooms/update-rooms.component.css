@@ -12,7 +12,7 @@
 }
 
 /* Heading styling */
-.room-heading{
+.room-heading {
     text-align: center;
     color: #1434A4;
     font-size: 2rem;
@@ -77,7 +77,8 @@
 }
 
 .btn {
-    width: 48%; /* Adjusted for two buttons side by side */
+    width: 48%;
+    /* Adjusted for two buttons side by side */
     padding: 10px;
     margin: 16px 0px 0px;
     font-size: 16px;
@@ -119,6 +120,23 @@
     opacity: 0.6;
 }
 
+.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
 /* Alert styling */
 .alert {
     text-align: center;
@@ -147,7 +165,8 @@
     .btn {
         font-size: 14px;
         padding: 8px;
-        width: 100%; /* Full-width buttons on smaller screens */
+        width: 100%;
+        /* Full-width buttons on smaller screens */
     }
 
     .mt-3.d-flex {

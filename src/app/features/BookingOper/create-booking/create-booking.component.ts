@@ -5,10 +5,11 @@ import { BookingService } from '../services/booking.service';
 import { CreateBooking } from '../models/create-booking.model';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-booking',
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule,CommonModule],
   templateUrl: './create-booking.component.html',
   styleUrl: './create-booking.component.css'
 })

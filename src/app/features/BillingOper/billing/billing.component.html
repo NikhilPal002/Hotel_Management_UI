@@ -37,7 +37,7 @@
           (change)="onServiceSelection()"
         >
           <option *ngFor="let service of services" [value]="service.id">
-            {{ service.serviceName }} - {{ service.serviceCost | currency }}
+            {{ service.serviceName }} - {{ service.serviceCost | currency:'INR':'symbol' }}
           </option>
         </select>
       </div>
@@ -47,7 +47,7 @@
         <label>Selected Services:</label>
         <ul>
           <li *ngFor="let service of selectedServices">
-            {{ service.serviceName }} - {{ service.serviceCost | currency }}
+            {{ service.serviceName }} - {{ service.serviceCost | currency:'INR':'symbol' }}
           </li>
         </ul>
       </div>

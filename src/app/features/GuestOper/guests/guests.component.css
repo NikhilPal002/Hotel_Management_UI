@@ -120,6 +120,17 @@
     /* Slightly faded appearance */
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 576px) {
     .container {

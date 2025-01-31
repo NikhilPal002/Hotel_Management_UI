@@ -1,53 +1,61 @@
 <div class="container">
     <h3 class="room-heading">Edit Inventory</h3>
-    <ng-container *ngIf ="inventory;else notFound"  >
-        <form #Form="ngForm" (ngSubmit)="onFormSubmit()"  >
+    <ng-container *ngIf="inventory;else notFound">
+        <form #Form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
             <div class="form-data">
                 <div class="mb-3">
                     <label class="form-label">InventoryId</label>
                     <input type="number" disabled class="form-control" id="inventoryId" name="inventoryId"
-                    [(ngModel)]="inventory.inventoryId"  >
+                        [(ngModel)]="inventory.inventoryId">
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Inventory Name</label>
                     <input type="text" class="form-control" id="roomType" name="roomType"
-                    [(ngModel)]="inventory.inventoryName"  >
+                        [(ngModel)]="inventory.inventoryName" required #inventoryName="ngModel">
+                    <div *ngIf="inventoryName.invalid && inventoryName.touched" class="text-danger">
+                        <small *ngIf="inventoryName.errors?.['required']">Inventory Name is required.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
                     <input type="number" class="form-control" id="description" name="description"
-                    [(ngModel)]="inventory.quantity"  >
+                        [(ngModel)]="inventory.quantity" required min="1" #quantity="ngModel">
+                    <div *ngIf="quantity.invalid && quantity.touched" class="text-danger">
+                        <small *ngIf="quantity.errors?.['required']">Quantity is required.</small>
+                        <small *ngIf="quantity.errors?.['min']">Quantity must be at least 1.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-3">
                     <label class="form-label">Category</label>
                     <input type="text" class="form-control" id="numberOfBeds" name="numberOfBeds"
-                    [(ngModel)]="inventory.category" >
+                        [(ngModel)]="inventory.category" required #category="ngModel">
+                    <div *ngIf="category.invalid && category.touched" class="text-danger">
+                        <small *ngIf="category.errors?.['required']">Category is required.</small>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Last Updated</label>
                     <input type="datetime-local" disabled class="form-control" id="lastUpdate" name="lastUpdate"
-                    [(ngModel)]="formattedLastUpdated" >
+                        [(ngModel)]="formattedLastUpdated">
                 </div>
-    
+
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Update Item</button>
-                    <button class="btn btn-danger mt-3" type="button"
-                    (click)="onDelete()"
-                    >Delete</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="Form.invalid">Update Item</button>
+                    <button class="btn btn-danger mt-3" type="button" (click)="onDelete()">Delete</button>
                 </div>
-    
+
             </div>
         </form>
 
     </ng-container>
 
     <ng-template #notFound>
-        <div class="alert alert-warning" role="alert" >
-           Inventory not found!
+        <div class="alert alert-warning" role="alert">
+            Inventory not found!
         </div>
 
     </ng-template>

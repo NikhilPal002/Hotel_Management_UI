@@ -5,11 +5,12 @@ import { Subscription } from 'rxjs';
 import { StaffService } from '../services/staff.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-staff',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './add-staff.component.html',
   styleUrl: './add-staff.component.css'
 })

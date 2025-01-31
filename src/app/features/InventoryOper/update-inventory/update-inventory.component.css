@@ -119,6 +119,17 @@
     opacity: 0.6;
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-control.ng-invalid.ng-touched {
+    border-color: red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
 /* Alert styling */
 .alert {
     text-align: center;

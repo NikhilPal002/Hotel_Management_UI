@@ -1,67 +1,87 @@
 <div class="container">
-    <h1 class="mt-3">Edit guest</h1>
-    <ng-container *ngIf ="guest;else notFound"  >
-        <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <h1 class="mt-3">Edit Guest</h1>
+    <ng-container *ngIf="guest; else notFound">
+        <form #form="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
             <div class="form-data">
                 <div class="mb-3">
                     <label for="guestId" class="form-label">Guest Id</label>
                     <input type="text" disabled class="form-control" id="guestId" name="guestId"
-                        [(ngModel)]="guest.guestId" >
+                        [(ngModel)]="guest.guestId">
                 </div>
+
                 <div class="mb-3">
                     <label for="guestName" class="form-label">Guest Name</label>
                     <input type="text" class="form-control" id="guestName" name="guestName"
-                    [(ngModel)]="guest.guestName"  >
+                        [(ngModel)]="guest.guestName" required #guestName="ngModel">
+                    <div *ngIf="guestName.invalid && guestName.touched" class="text-danger">
+                        <small *ngIf="guestName.errors?.['required']">Guest name is required.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-3">
                     <label for="guestEmail" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email"
-                    [(ngModel)]="guest.email" >
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="guest.email" required
+                        email #email="ngModel">
+                    <div *ngIf="email.invalid && email.touched" class="text-danger">
+                        <small *ngIf="email.errors?.['required']">Email is required.</small>
+                        <small *ngIf="email.errors?.['email']">Enter a valid email address.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-3">
                     <label for="guestGender" class="input-label">Gender</label>
-                    <select class="form-select" id="gender"  [(ngModel)]="guest.gender" name="gender" >
-                        <option selected>{{guest.gender}}</option>
+                    <select class="form-select" id="gender" [(ngModel)]="guest.gender" name="gender" required
+                        #gender="ngModel">
+                        <option value="" disabled>Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
+                    <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+                        <small *ngIf="gender.errors?.['required']">Gender selection is required.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-3">
                     <label for="guestNumber" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" id="phone" name="phoneNumber"
-                    [(ngModel)]="guest.phoneNumber" >
+                        [(ngModel)]="guest.phoneNumber" required pattern="^[0-9]{10}$" #phone="ngModel">
+                    <div *ngIf="phone.invalid && phone.touched" class="text-danger">
+                        <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+                        <small *ngIf="phone.errors?.['pattern']">Phone number must be 10 digits.</small>
+                    </div>
                 </div>
-    
+
                 <div class="col-md-6">
                     <label for="guestCity" class="form-label">State</label>
-                    <input type="text" class="form-control" id="inputCity"  name="inputCity"  [(ngModel)]="guest.state" >
+                    <input type="text" class="form-control" id="inputCity" name="inputCity" [(ngModel)]="guest.state"
+                        required #state="ngModel">
+                    <div *ngIf="state.invalid && state.touched" class="text-danger">
+                        <small *ngIf="state.errors?.['required']">State is required.</small>
+                    </div>
                 </div>
-    
+
                 <div class="col-md-2">
                     <label for="guestPinCode" class="form-label">PinCode</label>
-                    <input type="text" class="form-control" id="inputZip" name="inputZip"  [(ngModel)]="guest.pinCode" >
+                    <input type="text" class="form-control" id="inputZip" name="inputZip" [(ngModel)]="guest.pinCode"
+                        required pattern="^[0-9]{6}$" #pinCode="ngModel">
+                    <div *ngIf="pinCode.invalid && pinCode.touched" class="text-danger">
+                        <small *ngIf="pinCode.errors?.['required']">PinCode is required.</small>
+                        <small *ngIf="pinCode.errors?.['pattern']">PinCode must be exactly 6 digits.</small>
+                    </div>
                 </div>
-    
+
                 <div class="mt-3 d-flex">
-                    <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-danger mt-3" type="button"
-                    (click)="onDelete()"
-                    >Delete</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Save</button>
+                    <button class="btn btn-danger ms-3" type="button" (click)="onDelete()">Delete</button>
                 </div>
-    
             </div>
         </form>
-
     </ng-container>
 
     <ng-template #notFound>
-        <div class="alert alert-warning" role="alert" >
-           Guest not found!
+        <div class="alert alert-warning" role="alert">
+            Guest not found!
         </div>
-
     </ng-template>
 </div>

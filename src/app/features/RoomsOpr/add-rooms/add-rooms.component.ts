@@ -7,11 +7,12 @@ import { Subscription } from 'rxjs';
 import { nextTick } from 'process';
 import { response } from 'express';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-rooms',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './add-rooms.component.html',
   styleUrl: './add-rooms.component.css'
 })

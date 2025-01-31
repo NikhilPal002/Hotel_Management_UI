@@ -32,14 +32,14 @@
                         <td>{{ booking.checkIn | date: 'shortDate' }}</td>
                         <td>{{ booking.checkOut | date: 'shortDate' }}</td>
                         <td>{{ booking.numberOfNights }}</td>
-                        <td>{{ booking.totalCost | currency }}</td>
+                        <td>{{ booking.totalCost | currency:'INR':'symbol' }}</td>
                         <td>{{ booking.bookingStatus }}</td>
                         <td>{{ booking.paymentStatus }}</td>
                         <td>{{ booking.guest?.guestName }}</td>
                         <td>{{ booking.guest?.email }}</td>
                         <td>{{ booking.room?.roomId }}</td>
                         <td>{{ booking.room?.roomType }}</td>
-                        <td>{{ booking.room?.pricePerNight | currency }}</td>
+                        <td>{{ booking.room?.pricePerNight | currency:'INR':'symbol' }}</td>
                         <td>
                             <button class="btn btn-danger" type="button" (click)="onDelete(booking.bookingId)">
                                 Cancel

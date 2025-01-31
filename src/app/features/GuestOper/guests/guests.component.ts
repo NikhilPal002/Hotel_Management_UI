@@ -5,11 +5,12 @@ import { GuestService } from '../services/guest.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-guests',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './guests.component.html',
   styleUrl: './guests.component.css'
 })
