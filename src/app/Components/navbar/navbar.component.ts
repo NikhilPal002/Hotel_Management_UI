@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   user?: User;
+  isDropdownOpen = false;
 
   constructor(private authService: AuthService,
     private router: Router
@@ -37,4 +38,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  toggleDropdown(event: Event) {
+    event.preventDefault(); // Prevent default behavior
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

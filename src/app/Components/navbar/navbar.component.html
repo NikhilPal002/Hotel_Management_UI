@@ -1,15 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
   <div class="container">
     <a class="navbar-brand custom-brand" href="#">StaySphere</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -50,8 +43,14 @@
 
         <!-- Owner-specific links -->
         <ng-container *ngIf="user?.roles?.includes('Owner')">
-          <li class="nav-item">
-            <a class="nav-link custom-link" [routerLink]="['/owner/reports']">Reports</a>
+          <li class="nav-item dropdown" [class.show]="isDropdownOpen">
+            <a class="nav-link dropdown-toggle" href="#" role="button" (click)="toggleDropdown($event)">
+              Reports
+            </a>
+            <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+              <li><a class="dropdown-item" [routerLink]="['/owner/reports/staff-payment']">Staff Payment</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/owner/reports/income-report']">Income</a></li>
+            </ul>
           </li>
         </ng-container>
       </ul>
@@ -68,10 +67,7 @@
         <ng-template #loggedIn>
           <li class="nav-item d-flex align-items-center">
             <span class="me-3 user-email">{{ user?.email }}</span>
-            <button
-              class="btn btn-primary custom-logout-btn"
-              (click)="onLogout()"
-            >
+            <button class="btn btn-primary custom-logout-btn" (click)="onLogout()">
               Logout
             </button>
           </li>

@@ -23,6 +23,8 @@ import { BillingComponent } from './features/BillingOper/billing/billing.compone
 import { BillListComponent } from './features/BillingOper/bill-list/bill-list.component';
 import { ViewBillComponent } from './features/BillingOper/view-bill/view-bill.component';
 import { PaymentDetailComponent } from './features/PaymentOper/payment-detail/payment-detail.component';
+import { StaffPaymentReportComponent } from './features/ReportsOper/staff-payment-report/staff-payment-report.component';
+import { IncomeReportComponent } from './features/ReportsOper/income-report/income-report.component';
 
 
 export const routes: Routes = [
@@ -133,5 +135,17 @@ export const routes: Routes = [
         component: ViewBillComponent,
         canActivate: [authGuard]
     },
+    {
+        path: 'owner/reports/staff-payment',
+        component: StaffPaymentReportComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'owner/reports/income-report',
+        component: IncomeReportComponent,
+        canActivate: [authGuard]
+    },
+
+
 
 ];

@@ -1,0 +1,34 @@
+<div class="report-container">
+  <h2>Staff Payment Report</h2>
+
+  <div class="date-inputs">
+    <div>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" [(ngModel)]="startDate" />
+    </div>
+
+    <div>
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" [(ngModel)]="endDate" />
+    </div>
+  </div>
+
+  <button class="get-report-btn" (click)="fetchReport()">Get Report</button>
+
+
+  <div *ngIf="report" class="report-results">
+    <h3 class="report-title">Report from {{ formatDateForDisplay(report.startDate) }} to {{
+      formatDateForDisplay(report.endDate) }}</h3>
+    <div class="report-summary">
+      <div class="card total-payment">
+        <h4>Total Payments</h4>
+        <p>{{ formatPaymentAmount(report.totalPayments) }}</p>
+      </div>
+
+      <div class="card total-staff">
+        <h4>Total Staff</h4>
+        <p>{{ report.totalStaff }}</p>
+      </div>
+    </div>
+  </div>
+</div>

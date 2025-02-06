@@ -12,15 +12,15 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   processPayment(model: Payment): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/Payment`, model);
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Payment?AddAuth=true`, model);
   }
 
   getPayments(): Observable<Payment[]> {
-    return this.http.get<Payment[]>(`${environment.apiBaseUrl}/api/Payment`);
+    return this.http.get<Payment[]>(`${environment.apiBaseUrl}/api/Payment?AddAuth=true`);
   }
 
   getPaymentByBillingId(billingId: number): Observable<Payment> {
-    return this.http.get<Payment>(`${environment.apiBaseUrl}/api/Payment/billing/${billingId}`);
+    return this.http.get<Payment>(`${environment.apiBaseUrl}/api/Payment/billing/${billingId}?AddAuth=true`);
   }
 
 }

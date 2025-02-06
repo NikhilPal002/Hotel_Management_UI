@@ -1,0 +1,46 @@
+<div class="report-container">
+    <h2>Income Report</h2>
+
+    <div class="date-inputs">
+        <div>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" (change)="onStartDateChange($event)" />
+        </div>
+        <div>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" (change)="onEndDateChange($event)" />
+        </div>
+    </div>
+
+    <button class="get-report-btn" (click)="fetchReport()">Get Report</button>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="incomeReport" class="report-results">
+        <h3 class="report-title">Income Report Details</h3>
+
+        <div class="report-summary">
+            <div class="card">
+                <h4>Start Date</h4>
+                <p>{{ incomeReport.startDate | date }}</p>
+            </div>
+            <div class="card">
+                <h4>End Date</h4>
+                <p>{{ incomeReport.endDate | date }}</p>
+            </div>
+        </div>
+
+        <div class="report-summary">
+            <div class="card">
+                <h4>Total Income</h4>
+                <p>{{ incomeReport.totalIncome | currency : 'INR' :'symbol' }}</p>
+            </div>
+            <div class="card">
+                <h4>Number of Reservations</h4>
+                <p>{{ incomeReport.noOfBookings }}</p>
+            </div>
+        </div>
+    </div>
+</div>

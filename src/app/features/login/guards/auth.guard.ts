@@ -25,7 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       }
 
       // Check user roles
-      const allowedRoles = ['Receptionist', 'Manager'];
+      const allowedRoles = ['Receptionist', 'Manager','Owner'];
       if (allowedRoles.some((role) => user.roles.includes(role))) {
         return true; // User is authorized
       } else {
